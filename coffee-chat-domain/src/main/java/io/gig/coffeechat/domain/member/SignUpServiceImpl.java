@@ -23,7 +23,9 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     @Transactional
     public String menteeSignUp(String uuid, MenteeCommand.SignUp signUpInfo) {
+
         MenteeDetail menteeDetail = MenteeDetail.createMenteeDetail(signUpInfo.getMenteeDetailInfo());
+        menteeDetail.validateYear(signUpInfo.getMenteeDetailInfo().getYear());
         Member newMentee = Member.MenteeSignUp(uuid, signUpInfo, menteeDetail);
         Member savedMentee = signUpStore.store(newMentee);
         return savedMentee.getUuid();
@@ -32,7 +34,9 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     @Transactional
     public String mentorSignUp(String uuid, MentorCommand.SignUp signUpInfo) {
+
         MentorDetail mentorDetail = MentorDetail.createMentorDetail(signUpInfo.getMentorDetailInfo());
+        mentorDetail.validateYear(signUpInfo.getMentorDetailInfo().getYear());
         Member newMentor = Member.MentorSignUp(uuid, signUpInfo, mentorDetail);
         Member savedMentor = signUpStore.store(newMentor);
         return savedMentor.getUuid();
@@ -40,7 +44,9 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public String parentSignUp(String uuid, ParentCommand.SignUp signUpInfo) {
+
         ParentDetail parentDetail = ParentDetail.createParentDetail(signUpInfo.getParentDetailInfo());
+        parentDetail.validateYear(signUpInfo.getParentDetailInfo().getYear());
         Member newParent = Member.ParentSignUp(uuid, signUpInfo, parentDetail);
         Member savedParent = signUpStore.store(newParent);
         return savedParent.getUuid();

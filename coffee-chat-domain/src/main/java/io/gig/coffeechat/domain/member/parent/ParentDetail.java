@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 
@@ -37,6 +38,8 @@ public class ParentDetail {
     @Column(nullable = false)
     private String schoolName;
 
+    private static Long YEAR_MAX_VALUE = 3L;
+
     public static ParentDetail createParentDetail(ParentCommand.ParentDetailInfo info) {
         return ParentDetail.builder()
                 .studentType(info.getStudentType())
@@ -45,4 +48,7 @@ public class ParentDetail {
                 .build();
     }
 
+    public void validateYear(Integer year) {
+        Assert.isTrue(year <= YEAR_MAX_VALUE, "자녀의 학년 정보를 다시 입력해주세요.");
+    }
 }

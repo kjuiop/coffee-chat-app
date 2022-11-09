@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
+import java.security.InvalidParameterException;
 
 /**
  * @author : JAKE
@@ -37,6 +39,8 @@ public class MentorDetail {
     @Column(nullable = false)
     private String major;
 
+    private static Long YEAR_MAX_VALUE = 4L;
+
     public static MentorDetail createMentorDetail(MentorCommand.MentorDetailInfo info) {
         return MentorDetail.builder()
                 .schoolName(info.getSchoolName())
@@ -46,4 +50,7 @@ public class MentorDetail {
                 .build();
     }
 
+    public void validateYear(Integer year) {
+        Assert.isTrue(year <= YEAR_MAX_VALUE, "학년 정보를 다시 입력해주세요.");
+    }
 }
