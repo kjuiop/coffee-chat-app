@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.controller;
+package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import io.gig.coffeechat.service.api.dto.mentee.MenteeDto;

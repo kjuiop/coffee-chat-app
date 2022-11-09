@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.controller;
+package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.domain.member.mentor.MentorCommand;
 import io.gig.coffeechat.service.api.dto.mentor.MentorDto;
