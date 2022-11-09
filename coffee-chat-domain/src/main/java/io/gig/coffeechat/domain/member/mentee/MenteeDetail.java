@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member.mentee;
 
+import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.types.StudentType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -39,7 +40,7 @@ public class MenteeDetail {
 
     private static Long YEAR_MAX_VALUE = 3L;
 
-    public static MenteeDetail createMenteeDetail(MenteeCommand.MenteeDetailInfo info) {
+    public static MenteeDetail createMenteeDetail(MemberCommand.MenteeDetailInfo info) {
         return MenteeDetail.builder()
                 .studentType(info.getStudentType())
                 .year(info.getYear())

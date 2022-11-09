@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member.mentor;
 
+import io.gig.coffeechat.domain.member.MemberCommand;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public class MentorDetail {
 
     private static Long YEAR_MAX_VALUE = 4L;
 
-    public static MentorDetail createMentorDetail(MentorCommand.MentorDetailInfo info) {
+    public static MentorDetail createMentorDetail(MemberCommand.MentorDetailInfo info) {
         return MentorDetail.builder()
                 .schoolName(info.getSchoolName())
                 .year(info.getYear())

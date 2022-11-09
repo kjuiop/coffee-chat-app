@@ -54,7 +54,7 @@ class MenteeControllerTest extends ServiceApiTestConfig {
         String content = convertJsonToString(request);
 
         // when
-        ResultActions result = mockMvc.perform(post("/api/members/mentees/2/sign-up")
+        ResultActions result = mockMvc.perform(post("/api/members/2/sign-up")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
