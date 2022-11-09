@@ -18,16 +18,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SignUpServiceImpl implements SignUpService {
 
-    private final SignUpStore signUpStore;
+    private final MemberStore memberStore;
+    private final MemberReader memberReader;
 
     @Override
     @Transactional
     public String menteeSignUp(String uuid, MenteeCommand.SignUp signUpInfo) {
 
+        checkDuplicateUuid(uuid);
         MenteeDetail menteeDetail = MenteeDetail.createMenteeDetail(signUpInfo.getMenteeDetailInfo());
         menteeDetail.validateYear(signUpInfo.getMenteeDetailInfo().getYear());
         Member newMentee = Member.MenteeSignUp(uuid, signUpInfo, menteeDetail);
-        Member savedMentee = signUpStore.store(newMentee);
+        Member savedMentee = memberStore.store(newMentee);
         return savedMentee.getUuid();
     }
 
@@ -38,7 +40,7 @@ public class SignUpServiceImpl implements SignUpService {
         MentorDetail mentorDetail = MentorDetail.createMentorDetail(signUpInfo.getMentorDetailInfo());
         mentorDetail.validateYear(signUpInfo.getMentorDetailInfo().getYear());
         Member newMentor = Member.MentorSignUp(uuid, signUpInfo, mentorDetail);
-        Member savedMentor = signUpStore.store(newMentor);
+        Member savedMentor = memberStore.store(newMentor);
         return savedMentor.getUuid();
     }
 
@@ -48,7 +50,14 @@ public class SignUpServiceImpl implements SignUpService {
         ParentDetail parentDetail = ParentDetail.createParentDetail(signUpInfo.getParentDetailInfo());
         parentDetail.validateYear(signUpInfo.getParentDetailInfo().getYear());
         Member newParent = Member.ParentSignUp(uuid, signUpInfo, parentDetail);
-        Member savedParent = signUpStore.store(newParent);
+        Member savedParent = memberStore.store(newParent);
         return savedParent.getUuid();
+    }
+
+    private void checkDuplicateUuid(String uuid) {
+        boolean isDuplicated = memberReader.isExistUuId(uuid);
+        if (isDuplicated) {
+            throw new IllegalArgumentException("이미 가입한 회원입니다. uuid : " + uuid);
+        }
     }
 }

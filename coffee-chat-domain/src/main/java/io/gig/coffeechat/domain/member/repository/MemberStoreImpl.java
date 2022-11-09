@@ -1,7 +1,7 @@
 package io.gig.coffeechat.domain.member.repository;
 
 import io.gig.coffeechat.domain.member.Member;
-import io.gig.coffeechat.domain.member.SignUpStore;
+import io.gig.coffeechat.domain.member.MemberStore;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class SignUpStoreImpl implements SignUpStore {
+public class MemberStoreImpl implements MemberStore {
 
-    private final SignUpRepository signUpRepository;
+    private final MemberStoreRepository memberStoreRepository;
 
     @Override
     public Member store(Member member) {
-        return signUpRepository.save(member);
+        return memberStoreRepository.save(member);
     }
 
 }
