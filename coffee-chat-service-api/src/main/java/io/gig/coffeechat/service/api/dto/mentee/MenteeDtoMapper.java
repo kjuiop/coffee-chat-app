@@ -1,5 +1,6 @@
 package io.gig.coffeechat.service.api.dto.mentee;
 
+import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,4 +15,9 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
 public interface MenteeDtoMapper {
+
+    MenteeCommand.SignUp of(MenteeDto.SignUpRequest request);
+
+    MenteeDto.SignUpResponse of(String signUpToken);
+
 }
