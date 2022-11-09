@@ -1,12 +1,15 @@
 package io.gig.coffeechat.service.api;
 
+import io.gig.coffeechat.domain.config.ComponentConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Import;
 
 /**
  * @author : JAKE
  * @date : 2022/11/09
  */
+@Import(ComponentConfig.class)
 @SpringBootApplication
 public class ServiceApiApplication {
 
