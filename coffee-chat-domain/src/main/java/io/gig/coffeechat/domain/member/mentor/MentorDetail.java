@@ -25,12 +25,16 @@ public class MentorDetail {
     @Column(name = "mentor_id")
     private Long id;
 
+    @Column(nullable = false)
     private String schoolName;
 
+    @Column(nullable = false)
     private Integer year;
 
+    @Column(nullable = false)
     private String studentNo;
 
+    @Column(nullable = false)
     private String major;
 
     public static MentorDetail createMentorDetail(MentorCommand.MentorDetailInfo info) {

@@ -26,11 +26,14 @@ public class MenteeDetail {
     @Column(name = "mentee_id")
     private Long id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
 
+    @Column(nullable = false)
     private Integer year;
 
+    @Column(nullable = false)
     private String schoolName;
 
     public static MenteeDetail createMenteeDetail(MenteeCommand.MenteeDetailInfo info) {

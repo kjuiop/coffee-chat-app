@@ -36,17 +36,23 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;
 
+    @Column(nullable = false)
     private String uuid;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String nickname;
 
+    @Column(nullable = false)
     private LocalDate birth;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private GenderType gender;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UsageAuthorityType usageAuthority;
 

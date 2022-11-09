@@ -27,11 +27,14 @@ public class ParentDetail {
     @Column(name = "parent_id")
     private Long id;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private StudentType studentType;
 
+    @Column(nullable = false)
     private Integer year;
 
+    @Column(nullable = false)
     private String schoolName;
 
     public static ParentDetail createParentDetail(ParentCommand.ParentDetailInfo info) {
