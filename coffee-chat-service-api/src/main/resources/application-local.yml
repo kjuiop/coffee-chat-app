@@ -1,0 +1,35 @@
+spring:
+  config:
+    activate:
+      on-profile: local
+  h2:
+    console:
+      enabled: false
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/coffee_chat
+    username: postgres
+    password: 1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        default_batch_fetch_size: 500
+        #        show_sql: true
+        format_sql: true
+        use_sql_comments: false
+    show-sql: true
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+
+
