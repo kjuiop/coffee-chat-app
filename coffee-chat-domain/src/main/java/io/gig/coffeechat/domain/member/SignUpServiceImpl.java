@@ -4,6 +4,8 @@ import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
 import io.gig.coffeechat.domain.member.mentor.MentorCommand;
 import io.gig.coffeechat.domain.member.mentor.MentorDetail;
+import io.gig.coffeechat.domain.member.parent.ParentCommand;
+import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,5 +36,13 @@ public class SignUpServiceImpl implements SignUpService {
         Member newMentor = Member.MentorSignUp(uuid, signUpInfo, mentorDetail);
         Member savedMentor = signUpStore.store(newMentor);
         return savedMentor.getUuid();
+    }
+
+    @Override
+    public String parentSignUp(String uuid, ParentCommand.SignUp signUpInfo) {
+        ParentDetail parentDetail = ParentDetail.createParentDetail(signUpInfo.getParentDetailInfo());
+        Member newParent = Member.ParentSignUp(uuid, signUpInfo, parentDetail);
+        Member savedParent = signUpStore.store(newParent);
+        return savedParent.getUuid();
     }
 }

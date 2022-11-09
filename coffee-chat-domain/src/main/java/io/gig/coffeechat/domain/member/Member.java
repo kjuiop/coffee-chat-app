@@ -6,6 +6,8 @@ import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
 import io.gig.coffeechat.domain.member.mentor.MentorCommand;
 import io.gig.coffeechat.domain.member.mentor.MentorDetail;
+import io.gig.coffeechat.domain.member.parent.ParentCommand;
+import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
 import lombok.*;
@@ -73,6 +75,10 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "mentor_id")
     private MentorDetail mentorDetail;
 
+    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "parent_id")
+    private ParentDetail parentDetail;
+
     public static Member MenteeSignUp(String uuid, MenteeCommand.SignUp signUp, MenteeDetail menteeDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
@@ -102,6 +108,22 @@ public class Member extends BaseTimeEntity {
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
                 .mentorDetail(mentorDetail)
+                .build();
+    }
+
+    public static Member ParentSignUp(String uuid, ParentCommand.SignUp signUp, ParentDetail parentDetail) {
+        LocalDateTime current = LocalDateTime.now();
+        return Member.builder()
+                .uuid(uuid)
+                .email(signUp.getEmail())
+                .nickname(signUp.getNickname())
+                .birth(signUp.getBirth())
+                .gender(signUp.getGender())
+                .usageAuthority(signUp.getUsageAuthority())
+                .joinedAt(current)
+                .policyAgreementAt(current)
+                .privacyAgreementAt(current)
+                .parentDetail(parentDetail)
                 .build();
     }
 }
