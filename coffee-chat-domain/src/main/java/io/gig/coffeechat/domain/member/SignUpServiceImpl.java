@@ -2,6 +2,8 @@ package io.gig.coffeechat.domain.member;
 
 import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
+import io.gig.coffeechat.domain.member.mentor.MentorCommand;
+import io.gig.coffeechat.domain.member.mentor.MentorDetail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,5 +27,12 @@ public class SignUpServiceImpl implements SignUpService {
         return savedMentee.getUuid();
     }
 
-
+    @Override
+    @Transactional
+    public String mentorSignUp(String uuid, MentorCommand.SignUp signUpInfo) {
+        MentorDetail mentorDetail = MentorDetail.createMentorDetail(signUpInfo.getMentorDetailInfo());
+        Member newMentor = Member.MentorSignUp(uuid, signUpInfo, mentorDetail);
+        Member savedMentor = signUpStore.store(newMentor);
+        return savedMentor.getUuid();
+    }
 }
