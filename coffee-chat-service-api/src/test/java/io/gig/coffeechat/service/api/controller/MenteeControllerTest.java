@@ -1,6 +1,7 @@
 package io.gig.coffeechat.service.api.controller;
 
 import io.gig.coffeechat.service.api.config.ServiceApiTestConfig;
+import io.gig.coffeechat.service.api.dto.mentee.MenteeDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,14 +34,35 @@ class MenteeControllerTest extends ServiceApiTestConfig {
     @Test
     public void menteeSignUpTest() throws Exception {
 
+        // given
+        MenteeDto.DetailInfo menteeDetail = MenteeDto.DetailInfo.builder()
+                .schoolName("언남고등학교")
+                .year(1)
+                .studentType("HIGH_SCHOOL_STUDENT")
+                .build();
+
+
+        MenteeDto.SignUpRequest request = MenteeDto.SignUpRequest.builder()
+                .email("arneg0shua@gmail.com")
+                .nickname("jake")
+                .gender("M")
+                .usageAuthority("MENTEE")
+                .birth(LocalDate.of(1992,8,25))
+                .menteeDetailInfo(menteeDetail)
+                .build();
+
+        String content = convertJsonToString(request);
+
         // when
-        ResultActions result = mockMvc.perform(post("/api/members/mentees/1/sign-up")
+        ResultActions result = mockMvc.perform(post("/api/members/mentees/2/sign-up")
+                .content(content)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
 
         // then
         result.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value("OK"))
+                .andExpect(jsonPath("$.data.signUpToken").value(2))
         ;
     }
 }

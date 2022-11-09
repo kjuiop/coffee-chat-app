@@ -1,8 +1,11 @@
 package io.gig.coffeechat.service.api.config;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -24,11 +27,21 @@ public abstract class ServiceApiTestConfig {
 
     protected MockMvc mockMvc;
 
+    @Autowired
+    protected ObjectMapper objectMapper;
+
     @BeforeEach
     void setUp(final WebApplicationContext context) {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
                 .alwaysDo(MockMvcResultHandlers.print())
                 .addFilters(new CharacterEncodingFilter("UTF-8", true))
                 .build();
+    }
+
+    protected String convertJsonToString(Object dto) throws JsonProcessingException {
+        if (dto == null) {
+            return null;
+        }
+        return this.objectMapper.writeValueAsString(dto);
     }
 }
