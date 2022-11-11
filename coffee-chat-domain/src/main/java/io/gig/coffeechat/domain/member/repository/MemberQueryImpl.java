@@ -20,4 +20,14 @@ public class MemberQueryImpl implements MemberReader {
     public boolean isExistUuId(String uuid) {
         return memberQueryRepository.existsByUuid(uuid);
     }
+
+    @Override
+    public boolean isExistEmail(String email) {
+        return memberQueryRepository.existsByEmail(email);
+    }
+
+    @Override
+    public boolean isExistNickname(String nickname) {
+        return memberQueryRepository.existsByNickname(nickname);
+    }
 }
