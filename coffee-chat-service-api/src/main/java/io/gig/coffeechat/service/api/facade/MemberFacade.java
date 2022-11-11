@@ -3,7 +3,6 @@ package io.gig.coffeechat.service.api.facade;
 import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.SignUpService;
 import io.gig.coffeechat.domain.member.SignUpServiceFactory;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
