@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member.parent;
 
+import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.types.StudentType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -40,7 +41,7 @@ public class ParentDetail {
 
     private static Long YEAR_MAX_VALUE = 3L;
 
-    public static ParentDetail createParentDetail(ParentCommand.ParentDetailInfo info) {
+    public static ParentDetail createParentDetail(MemberCommand.ParentDetailInfo info) {
         return ParentDetail.builder()
                 .studentType(info.getStudentType())
                 .year(info.getYear())

@@ -85,7 +85,7 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private ParentDetail parentDetail;
 
-    public static Member MenteeSignUp(String uuid, MenteeCommand.SignUp signUp, MenteeDetail menteeDetail) {
+    public static Member MenteeSignUp(String uuid, MemberCommand.SignUp signUp, MenteeDetail menteeDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
                 .uuid(uuid)
@@ -101,7 +101,7 @@ public class Member extends BaseTimeEntity {
                 .build();
     }
 
-    public static Member MentorSignUp(String uuid, MentorCommand.SignUp signUp, MentorDetail mentorDetail) {
+    public static Member MentorSignUp(String uuid, MemberCommand.SignUp signUp, MentorDetail mentorDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
                 .uuid(uuid)
@@ -117,7 +117,7 @@ public class Member extends BaseTimeEntity {
                 .build();
     }
 
-    public static Member ParentSignUp(String uuid, ParentCommand.SignUp signUp, ParentDetail parentDetail) {
+    public static Member ParentSignUp(String uuid, MemberCommand.SignUp signUp, ParentDetail parentDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
                 .uuid(uuid)
