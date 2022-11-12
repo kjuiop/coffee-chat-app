@@ -2,11 +2,8 @@ package io.gig.coffeechat.domain.member;
 
 import io.gig.coffeechat.domain.common.BaseTimeEntity;
 import io.gig.coffeechat.domain.common.YnType;
-import io.gig.coffeechat.domain.member.mentee.MenteeCommand;
 import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
-import io.gig.coffeechat.domain.member.mentor.MentorCommand;
 import io.gig.coffeechat.domain.member.mentor.MentorDetail;
-import io.gig.coffeechat.domain.member.parent.ParentCommand;
 import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
