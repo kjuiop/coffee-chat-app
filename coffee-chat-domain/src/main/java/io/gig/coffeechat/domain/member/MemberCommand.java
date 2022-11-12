@@ -27,7 +27,6 @@ public class MemberCommand {
         private final ParentDetailInfo parentDetailInfo;
     }
 
-
     @Getter
     @Builder
     public static class MenteeDetailInfo {
@@ -53,5 +52,16 @@ public class MemberCommand {
         private final String schoolName;
     }
 
+    @Getter
+    @Builder
+    public static class EmailValidate {
+        private String email;
+    }
+
+    @Getter
+    @Builder
+    public static class NicknameValidate {
+        private String nickname;
+    }
 
 }

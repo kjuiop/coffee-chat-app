@@ -1,6 +1,8 @@
 package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.service.api.dto.member.MemberDto;
+import io.gig.coffeechat.service.api.dto.member.MemberDtoMapper;
 import io.gig.coffeechat.service.api.dto.member.SignUpDto;
 import io.gig.coffeechat.service.api.dto.member.SignUpDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
@@ -24,6 +26,8 @@ import javax.validation.constraints.NotEmpty;
 public class SignUpController {
 
     private final SignUpDtoMapper signUpDtoMapper;
+
+    private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
 
     @PostMapping("members/{uuid}/sign-up")
@@ -41,14 +45,16 @@ public class SignUpController {
     public ResponseEntity<ApiResponse> validateDuplicateEmail(
             @NotEmpty @RequestParam("email") String email) {
         boolean validateToken = memberFacade.validateEmail(email);
-        return new ResponseEntity<>(ApiResponse.OK(validateToken), HttpStatus.CREATED);
+        MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
     }
 
     @GetMapping("nickname-verify")
     public ResponseEntity<ApiResponse> validateDuplicateNickname(
-            @NotEmpty @RequestParam("email") String email) {
-        boolean validateToken = memberFacade.validateNickname(email);
-        return new ResponseEntity<>(ApiResponse.OK(validateToken), HttpStatus.CREATED);
+            @NotEmpty @RequestParam("nickname") String nickname) {
+        boolean validateToken = memberFacade.validateNickname(nickname);
+        MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
     }
 
 }
