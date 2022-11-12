@@ -1,45 +1,30 @@
-package io.gig.coffeechat.service.api.controller.member;
+package io.gig.coffeechat.service.api.controller;
 
-import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.service.api.dto.member.MemberDto;
 import io.gig.coffeechat.service.api.dto.member.MemberDtoMapper;
-import io.gig.coffeechat.service.api.dto.member.SignUpDto;
-import io.gig.coffeechat.service.api.dto.member.SignUpDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
 import io.gig.coffeechat.service.api.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 /**
  * @author : JAKE
- * @date : 2022/11/09
+ * @date : 2022/11/12
  */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-public class SignUpController {
-
-    private final SignUpDtoMapper signUpDtoMapper;
+public class MemberController {
 
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
-
-    @PostMapping("members/{uuid}/sign-up")
-    @ResponseBody
-    public ResponseEntity<ApiResponse> signUp(
-            @PathVariable(name = "uuid") String uuid,
-            @RequestBody @Valid SignUpDto.SignUp request) {
-        MemberCommand.SignUp parentCommand = signUpDtoMapper.of(request);
-        String signUpToken = memberFacade.signUp(uuid, parentCommand);
-        SignUpDto.SignUpResponse response = signUpDtoMapper.of(signUpToken);
-        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
-    }
 
     @GetMapping("email-verify")
     public ResponseEntity<ApiResponse> validateDuplicateEmail(
