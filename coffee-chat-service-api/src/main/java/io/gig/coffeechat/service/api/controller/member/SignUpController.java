@@ -44,4 +44,11 @@ public class SignUpController {
         return new ResponseEntity<>(ApiResponse.OK(validateToken), HttpStatus.CREATED);
     }
 
+    @GetMapping("nickname-verify")
+    public ResponseEntity<ApiResponse> validateDuplicateNickname(
+            @NotEmpty @RequestParam("email") String email) {
+        boolean validateToken = memberFacade.validateNickname(email);
+        return new ResponseEntity<>(ApiResponse.OK(validateToken), HttpStatus.CREATED);
+    }
+
 }

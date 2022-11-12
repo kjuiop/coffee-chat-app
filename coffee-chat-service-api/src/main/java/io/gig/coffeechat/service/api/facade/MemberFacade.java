@@ -27,5 +27,9 @@ public class MemberFacade {
         return memberService.validateEmail(email);
     }
 
+    public boolean validateNickname(String nickname) {
+        return memberService.validateNickname(nickname);
+    }
+
 
 }

@@ -23,4 +23,14 @@ public class MemberServiceImpl implements MemberService {
         }
         return true;
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean validateNickname(String nickname) {
+        boolean isExistNickname = memberReader.isExistNickname(nickname);
+        if (isExistNickname) {
+            return false;
+        }
+        return true;
+    }
 }
