@@ -5,6 +5,7 @@
 /.gradle/
 .gradle
 
-
-
+coffee-chat-service-api/build
+coffee-chat-external-api/build
+coffee-chat-domain/build
 
