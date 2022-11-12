@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.dto.signup;
+package io.gig.coffeechat.service.api.dto.member;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 /**
@@ -17,6 +18,7 @@ public class SignUpDto {
     @Getter
     @Builder
     public static class SignUp {
+        @Pattern(regexp = "^[a-z0-9_+.-]+@([a-z0-9-]+\\.)+[a-z0-9]{2,4}$", message = "올바른 이메일 형식을 입력해주세요.")
         @NotBlank(message = "email 은 필수값입니다.")
         private String email;
 

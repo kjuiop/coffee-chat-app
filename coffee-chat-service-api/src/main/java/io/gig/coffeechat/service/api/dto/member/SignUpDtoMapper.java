@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.dto.signup;
+package io.gig.coffeechat.service.api.dto.member;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
 import org.mapstruct.InjectionStrategy;

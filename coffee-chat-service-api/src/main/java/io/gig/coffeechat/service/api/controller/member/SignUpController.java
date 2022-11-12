@@ -1,8 +1,8 @@
 package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDto;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDtoMapper;
+import io.gig.coffeechat.service.api.dto.member.SignUpDto;
+import io.gig.coffeechat.service.api.dto.member.SignUpDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
 import io.gig.coffeechat.service.api.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 /**
  * @author : JAKE
@@ -35,6 +36,13 @@ public class SignUpController {
         String signUpToken = memberFacade.signUp(uuid, parentCommand);
         SignUpDto.SignUpResponse response = signUpDtoMapper.of(signUpToken);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
+    }
+
+    @GetMapping("email-verify")
+    public ResponseEntity<ApiResponse> validateDuplicateEmail(
+            @NotEmpty @RequestParam("email") String email) {
+        boolean validateToken = memberFacade.validateEmail(email);
+        return new ResponseEntity<>(ApiResponse.OK(validateToken), HttpStatus.CREATED);
     }
 
 }
