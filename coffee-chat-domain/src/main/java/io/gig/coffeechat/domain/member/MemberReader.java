@@ -6,4 +6,6 @@ package io.gig.coffeechat.domain.member;
  */
 public interface MemberReader {
     boolean isExistUuId(String uuid);
+    boolean isExistEmail(String email);
+    boolean isExistNickname(String nickname);
 }

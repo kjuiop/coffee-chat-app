@@ -1,7 +1,7 @@
 package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.service.api.config.ServiceApiTestConfig;
-import io.gig.coffeechat.service.api.dto.mentor.MentorDto;
+import io.gig.coffeechat.service.api.dto.member.SignUpDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -9,7 +9,6 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,14 +24,14 @@ class MentorControllerTest extends ServiceApiTestConfig {
     public void mentorSignUpTest() throws Exception {
 
         // given
-        MentorDto.DetailInfo mentorDetailInfo = MentorDto.DetailInfo.builder()
+        SignUpDto.MentorDetailInfo mentorDetailInfo = SignUpDto.MentorDetailInfo.builder()
                 .schoolName("서울대학교")
                 .major("경영학과")
                 .year(4)
                 .studentNo("202034735")
                 .build();
 
-        MentorDto.SignUpRequest request = MentorDto.SignUpRequest
+        SignUpDto.SignUp request = SignUpDto.SignUp
                 .builder()
                 .email("arneg0shua@gmail.com")
                 .nickname("jake")

@@ -1,9 +1,9 @@
 package io.gig.coffeechat.service.api.facade;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.domain.member.MemberService;
 import io.gig.coffeechat.domain.member.SignUpService;
 import io.gig.coffeechat.domain.member.SignUpServiceFactory;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +16,20 @@ import org.springframework.stereotype.Service;
 public class MemberFacade {
 
     private final SignUpServiceFactory signUpServiceFactory;
+    private final MemberService memberService;
 
     public String signUp(String uuid, MemberCommand.SignUp request) {
         SignUpService signUpService = signUpServiceFactory.create(request);
         return signUpService.signUp(uuid, request);
     }
+
+    public boolean validateEmail(String email) {
+        return memberService.validateEmail(email);
+    }
+
+    public boolean validateNickname(String nickname) {
+        return memberService.validateNickname(nickname);
+    }
+
+
 }

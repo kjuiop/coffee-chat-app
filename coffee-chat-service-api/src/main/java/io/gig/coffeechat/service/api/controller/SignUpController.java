@@ -1,8 +1,8 @@
-package io.gig.coffeechat.service.api.controller.member;
+package io.gig.coffeechat.service.api.controller;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDto;
-import io.gig.coffeechat.service.api.dto.signup.SignUpDtoMapper;
+import io.gig.coffeechat.service.api.dto.member.SignUpDto;
+import io.gig.coffeechat.service.api.dto.member.SignUpDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
 import io.gig.coffeechat.service.api.utils.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +36,7 @@ public class SignUpController {
         SignUpDto.SignUpResponse response = signUpDtoMapper.of(signUpToken);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
     }
+
+
 
 }

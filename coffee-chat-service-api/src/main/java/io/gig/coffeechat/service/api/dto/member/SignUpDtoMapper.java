@@ -1,6 +1,6 @@
-package io.gig.coffeechat.service.api.dto.parent;
+package io.gig.coffeechat.service.api.dto.member;
 
-import io.gig.coffeechat.domain.member.parent.ParentCommand;
+import io.gig.coffeechat.domain.member.MemberCommand;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -14,10 +14,9 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
-public interface ParentDtoMapper {
+public interface SignUpDtoMapper {
 
-    ParentCommand.SignUp of(ParentDto.SignUpRequest request);
+    MemberCommand.SignUp of(SignUpDto.SignUp request);
 
-    ParentDto.SignUpResponse of(String signUpToken);
-
+    SignUpDto.SignUpResponse of(String signUpToken);
 }

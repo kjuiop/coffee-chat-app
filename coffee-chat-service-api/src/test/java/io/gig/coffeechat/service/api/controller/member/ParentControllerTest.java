@@ -1,7 +1,7 @@
 package io.gig.coffeechat.service.api.controller.member;
 
 import io.gig.coffeechat.service.api.config.ServiceApiTestConfig;
-import io.gig.coffeechat.service.api.dto.parent.ParentDto;
+import io.gig.coffeechat.service.api.dto.member.SignUpDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -24,13 +24,13 @@ class ParentControllerTest extends ServiceApiTestConfig {
     public void  parentSignUpTest() throws Exception {
 
         // given
-        ParentDto.DetailInfo parentDetailInfo = ParentDto.DetailInfo.builder()
+        SignUpDto.ParentDetailInfo parentDetailInfo = SignUpDto.ParentDetailInfo.builder()
                 .schoolName("언남고등학교")
                 .year(3)
                 .studentType("REPEATER_STUDENT")
                 .build();
 
-        ParentDto.SignUpRequest request = ParentDto.SignUpRequest
+        SignUpDto.SignUp request = SignUpDto.SignUp
                 .builder()
                 .email("arneg0shua@gmail.com")
                 .nickname("jake")
