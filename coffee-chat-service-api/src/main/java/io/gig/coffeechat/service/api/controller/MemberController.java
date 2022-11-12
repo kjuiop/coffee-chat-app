@@ -31,7 +31,7 @@ public class MemberController {
             @NotEmpty @RequestParam("email") String email) {
         boolean validateToken = memberFacade.validateEmail(email);
         MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
-        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
     @GetMapping("nickname-verify")
@@ -39,7 +39,7 @@ public class MemberController {
             @NotEmpty @RequestParam("nickname") String nickname) {
         boolean validateToken = memberFacade.validateNickname(nickname);
         MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
-        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
 }
