@@ -7,6 +7,7 @@ import io.gig.coffeechat.domain.member.mentor.MentorDetail;
 import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
+import io.gig.coffeechat.domain.member.types.UserStatusType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -58,6 +59,11 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private YnType deleteYn = YnType.N;
 
+    @Builder.Default
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private UserStatusType status = UserStatusType.PENDING;
+
     private LocalDateTime joinedAt;
 
     private LocalDateTime lastLoginAt;
@@ -94,6 +100,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .menteeDetail(menteeDetail)
                 .build();
     }
@@ -110,6 +117,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .mentorDetail(mentorDetail)
                 .build();
     }
@@ -126,7 +134,12 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .parentDetail(parentDetail)
                 .build();
+    }
+
+    public void isValidEmail() {
+        this.emailValidatedAt = LocalDateTime.now();
     }
 }

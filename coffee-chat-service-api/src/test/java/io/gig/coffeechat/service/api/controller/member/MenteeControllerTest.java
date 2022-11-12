@@ -36,8 +36,8 @@ class MenteeControllerTest extends ServiceApiTestConfig {
 
 
         SignUpDto.SignUp request = SignUpDto.SignUp.builder()
-                .email("arneg0shua1@gmail.com")
-                .nickname("jake1")
+                .email("arneg0shua@gmail.com")
+                .nickname("jake")
                 .gender("M")
                 .usageAuthority("MENTEE")
                 .birth(LocalDate.of(1992,8,25))
@@ -47,7 +47,7 @@ class MenteeControllerTest extends ServiceApiTestConfig {
         String content = convertJsonToString(request);
 
         // when
-        ResultActions result = mockMvc.perform(post("/api/members/3/sign-up")
+        ResultActions result = mockMvc.perform(post("/api/members/1/sign-up")
                 .content(content)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON));
@@ -55,7 +55,7 @@ class MenteeControllerTest extends ServiceApiTestConfig {
         // then
         result.andExpect(status().isCreated())
                 .andExpect(jsonPath("$.status").value("OK"))
-                .andExpect(jsonPath("$.data.signUpToken").value(3))
+                .andExpect(jsonPath("$.data.signUpToken").value(1))
         ;
     }
 }

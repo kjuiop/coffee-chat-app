@@ -35,6 +35,9 @@ public class SignUpDto {
         @NotBlank(message = "usageAuthority 는 필수값입니다.")
         private String usageAuthority;
 
+        @NotBlank(message = "marketingAgreeYn 는 필수값입니다.")
+        private String marketingAgreeYn;
+
         private MenteeDetailInfo menteeDetailInfo;
         private MentorDetailInfo mentorDetailInfo;
         private ParentDetailInfo parentDetailInfo;

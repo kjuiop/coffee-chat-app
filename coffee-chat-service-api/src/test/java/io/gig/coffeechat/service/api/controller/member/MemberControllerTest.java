@@ -22,6 +22,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class MemberControllerTest extends ServiceApiTestConfig {
 
+    @DisplayName("이메일_인증_반영_테스트")
+    @Test
+    public void authMemberEmailValidateTest() throws Exception {
+
+        // given
+
+        // when
+        ResultActions result = mockMvc.perform(get("/api/members/1/email-auth")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then
+        result.andExpect(status().isOk())
+                .andExpect(jsonPath("$.status").value("OK"));
+
+    }
+
     @DisplayName("이메일 중복 체크 테스트")
     @Test
     public void validEmailTest() throws Exception {

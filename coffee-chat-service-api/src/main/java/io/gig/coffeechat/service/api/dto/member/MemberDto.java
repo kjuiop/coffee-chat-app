@@ -15,4 +15,10 @@ public class MemberDto {
         private final Boolean isValid;
     }
 
+    @Getter
+    @Builder
+    public static class Response {
+        private final Boolean isOk;
+    }
+
 }

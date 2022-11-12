@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member;
 
+import io.gig.coffeechat.domain.common.YnType;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.StudentType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
@@ -22,6 +23,7 @@ public class MemberCommand {
         private final LocalDate birth;
         private final GenderType gender;
         private final UsageAuthorityType usageAuthority;
+        private final YnType marketingAgreeYn;
         private final MenteeDetailInfo menteeDetailInfo;
         private final MentorDetailInfo mentorDetailInfo;
         private final ParentDetailInfo parentDetailInfo;
