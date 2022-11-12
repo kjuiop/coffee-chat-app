@@ -100,6 +100,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .menteeDetail(menteeDetail)
                 .build();
     }
@@ -116,6 +117,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .mentorDetail(mentorDetail)
                 .build();
     }
@@ -132,6 +134,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .parentDetail(parentDetail)
                 .build();
     }
