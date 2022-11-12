@@ -7,6 +7,7 @@ import io.gig.coffeechat.domain.member.mentor.MentorDetail;
 import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
+import io.gig.coffeechat.domain.member.types.UserStatusType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -57,6 +58,11 @@ public class Member extends BaseTimeEntity {
     @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
     @Enumerated(EnumType.STRING)
     private YnType deleteYn = YnType.N;
+
+    @Builder.Default
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private UserStatusType status = UserStatusType.PENDING;
 
     private LocalDateTime joinedAt;
 
