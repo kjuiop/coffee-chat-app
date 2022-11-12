@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.InvalidParameterException;
+
 /**
  * @author : JAKE
  * @date : 2022/11/12
@@ -13,6 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberReader memberReader;
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean authMemberEmailValidate(String uuid) {
+        validateCheckMember(uuid);
+        Member findMember = memberReader.getMember(uuid);
+        findMember.isValidEmail();
+        return true;
+    }
+
+    private void validateCheckMember(String uuid) {
+        boolean isExistUuid = memberReader.isExistUuId(uuid);
+        if (!isExistUuid) {
+            throw new InvalidParameterException("존재하지 않는 회원입니다. uuid : " + uuid);
+        }
+    }
 
     @Override
     @Transactional(readOnly = true)

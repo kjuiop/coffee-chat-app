@@ -8,5 +8,5 @@ public interface MemberService {
 
     boolean validateEmail(String email);
     boolean validateNickname(String nickname);
-
+    boolean authMemberEmailValidate(String uuid);
 }

@@ -1,9 +1,14 @@
 package io.gig.coffeechat.domain.member.repository;
 
+import io.gig.coffeechat.domain.exception.NotFoundException;
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberReader;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * @author : JAKE
@@ -12,9 +17,20 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberQueryImpl implements MemberReader {
 
     private final MemberQueryRepository memberQueryRepository;
+
+    @Override
+    public Member getMember(String uuid) {
+        Optional<Member> findMember = memberQueryRepository.findByUuid(uuid);
+        if (findMember.isEmpty()) {
+            throw new NotFoundException("존재하지 않는 회원입니다. uuid : " + uuid);
+        }
+
+        return findMember.get();
+    }
 
     @Override
     public boolean isExistUuId(String uuid) {

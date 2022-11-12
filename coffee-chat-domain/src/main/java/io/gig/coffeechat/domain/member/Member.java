@@ -135,4 +135,8 @@ public class Member extends BaseTimeEntity {
                 .parentDetail(parentDetail)
                 .build();
     }
+
+    public void isValidEmail() {
+        this.emailValidatedAt = LocalDateTime.now();
+    }
 }
