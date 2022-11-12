@@ -20,14 +20,13 @@ import javax.validation.constraints.NotEmpty;
  */
 @Slf4j
 @RestController
-@RequestMapping("members")
 @RequiredArgsConstructor
 public class SignUpController {
 
     private final SignUpDtoMapper signUpDtoMapper;
     private final MemberFacade memberFacade;
 
-    @PostMapping("{uuid}/sign-up")
+    @PostMapping("members/{uuid}/sign-up")
     @ResponseBody
     public ResponseEntity<ApiResponse> signUp(
             @PathVariable(name = "uuid") String uuid,
