@@ -15,15 +15,16 @@ import java.security.InvalidParameterException;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberReader memberReader;
+    private final MemberStore memberStore;
 
 
     @Override
-    @Transactional(readOnly = true)
-    public boolean authMemberEmailValidate(String uuid) {
+    @Transactional
+    public void authMemberEmailValidate(String uuid) {
         validateCheckMember(uuid);
         Member findMember = memberReader.getMember(uuid);
         findMember.isValidEmail();
-        return true;
+        memberStore.store(findMember);
     }
 
     private void validateCheckMember(String uuid) {

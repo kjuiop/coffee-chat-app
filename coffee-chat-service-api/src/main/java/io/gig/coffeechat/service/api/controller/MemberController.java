@@ -27,12 +27,11 @@ public class MemberController {
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
 
-    @GetMapping("members/{uuid}/email-valid")
+    @GetMapping("members/{uuid}/email-auth")
     public ResponseEntity<ApiResponse> authEmailValidateCode(
             @PathVariable String uuid) {
-        boolean validateToken = memberFacade.authMemberEmailValidate(uuid);
-        MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
-        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+        memberFacade.authMemberEmailValidate(uuid);
+        return new ResponseEntity<>(ApiResponse.OK(), HttpStatus.OK);
     }
 
     @GetMapping("email-verify")

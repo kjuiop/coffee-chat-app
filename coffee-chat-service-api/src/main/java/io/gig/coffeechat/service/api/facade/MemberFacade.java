@@ -23,8 +23,8 @@ public class MemberFacade {
         return signUpService.signUp(uuid, request);
     }
 
-    public boolean authMemberEmailValidate(String uuid) {
-        return memberService.authMemberEmailValidate(uuid);
+    public void authMemberEmailValidate(String uuid) {
+        memberService.authMemberEmailValidate(uuid);
     }
 
     public boolean validateEmail(String email) {
