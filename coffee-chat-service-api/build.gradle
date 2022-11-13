@@ -23,6 +23,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 }
 
+bootJar{
+    archivesBaseName = 'coffee-chat'
+    archiveFileName = 'coffee-chat-service-api.jar'
+}
+
 test {
     useJUnitPlatform()
 }
