@@ -20,4 +20,16 @@ public class MemberTest {
         member.changeNickname(expected);
         Assertions.assertEquals(expected, member.getNickname());
     }
+
+    @DisplayName("회원의 닉네임은 10자를 초과할 수 없다.")
+    @Test
+    public void testNicknameMaxLength() {
+        var member = MemberFixtureFactory.create();
+        var overMaxLengthName = "arneg0shuaover10length";
+
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> member.changeNickname(overMaxLengthName)
+        );
+    }
 }
