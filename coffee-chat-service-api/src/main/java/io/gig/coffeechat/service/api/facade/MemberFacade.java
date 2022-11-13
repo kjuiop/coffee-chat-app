@@ -23,6 +23,10 @@ public class MemberFacade {
         return signUpService.signUp(uuid, request);
     }
 
+    public void authMemberEmailValidate(String uuid) {
+        memberService.authMemberEmailValidate(uuid);
+    }
+
     public boolean validateEmail(String email) {
         return memberService.validateEmail(email);
     }

@@ -7,8 +7,10 @@ import io.gig.coffeechat.domain.member.mentor.MentorDetail;
 import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
+import io.gig.coffeechat.domain.member.types.UserStatusType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -58,6 +60,11 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private YnType deleteYn = YnType.N;
 
+    @Builder.Default
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING)
+    private UserStatusType status = UserStatusType.PENDING;
+
     private LocalDateTime joinedAt;
 
     private LocalDateTime lastLoginAt;
@@ -82,6 +89,8 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private ParentDetail parentDetail;
 
+    final private static Long NAME_MAX_LENGTH = 10L;
+
     public static Member MenteeSignUp(String uuid, MemberCommand.SignUp signUp, MenteeDetail menteeDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
@@ -94,6 +103,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .menteeDetail(menteeDetail)
                 .build();
     }
@@ -110,6 +120,7 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .mentorDetail(mentorDetail)
                 .build();
     }
@@ -126,7 +137,21 @@ public class Member extends BaseTimeEntity {
                 .joinedAt(current)
                 .policyAgreementAt(current)
                 .privacyAgreementAt(current)
+                .marketingAgreementAt(signUp.getMarketingAgreeYn() == YnType.Y ? current : null)
                 .parentDetail(parentDetail)
                 .build();
+    }
+
+    public void isValidEmail() {
+        this.emailValidatedAt = LocalDateTime.now();
+    }
+
+    public void changeNickname(String nickname) {
+        validateNickname(nickname);
+        this.nickname = nickname;
+    }
+
+    public void validateNickname(String nickname) {
+        Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "닉네임의 최대 길이를 초과했습니다.");
     }
 }

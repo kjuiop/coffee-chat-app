@@ -8,4 +8,5 @@ public interface MemberReader {
     boolean isExistUuId(String uuid);
     boolean isExistEmail(String email);
     boolean isExistNickname(String nickname);
+    Member getMember(String uuid);
 }

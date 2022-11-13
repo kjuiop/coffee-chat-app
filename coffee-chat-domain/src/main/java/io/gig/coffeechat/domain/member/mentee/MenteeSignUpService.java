@@ -20,9 +20,13 @@ public class MenteeSignUpService implements SignUpService {
     @Override
     public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
+
         MenteeDetail menteeDetail = MenteeDetail.createMenteeDetail(signUpInfo.getMenteeDetailInfo());
         menteeDetail.validateYear(signUpInfo.getMenteeDetailInfo().getYear());
+
         Member newMentee = Member.MenteeSignUp(uuid, signUpInfo, menteeDetail);
+        newMentee.validateNickname(newMentee.getNickname());
+
         Member savedMentee = memberStore.store(newMentee);
         return savedMentee.getUuid();
     }

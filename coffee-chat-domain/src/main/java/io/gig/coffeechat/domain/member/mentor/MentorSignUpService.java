@@ -20,9 +20,13 @@ public class MentorSignUpService implements SignUpService {
     @Override
     public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
+
         MentorDetail mentorDetail = MentorDetail.createMentorDetail(signUpInfo.getMentorDetailInfo());
         mentorDetail.validateYear(signUpInfo.getMentorDetailInfo().getYear());
+
         Member newMentor = Member.MentorSignUp(uuid, signUpInfo, mentorDetail);
+        newMentor.validateNickname(newMentor.getNickname());
+
         Member savedMentor = memberStore.store(newMentor);
         return savedMentor.getUuid();
     }
