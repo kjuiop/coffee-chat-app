@@ -10,6 +10,7 @@ import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
 import io.gig.coffeechat.domain.member.types.UserStatusType;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -88,6 +89,8 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private ParentDetail parentDetail;
 
+    final private static Long NAME_MAX_LENGTH = 10L;
+
     public static Member MenteeSignUp(String uuid, MemberCommand.SignUp signUp, MenteeDetail menteeDetail) {
         LocalDateTime current = LocalDateTime.now();
         return Member.builder()
@@ -141,5 +144,14 @@ public class Member extends BaseTimeEntity {
 
     public void isValidEmail() {
         this.emailValidatedAt = LocalDateTime.now();
+    }
+
+    public void changeNickname(String nickname) {
+        validateNickname(nickname);
+        this.nickname = nickname;
+    }
+
+    public void validateNickname(String nickname) {
+        Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "닉네임의 최대 길이를 초과했습니다.");
     }
 }
