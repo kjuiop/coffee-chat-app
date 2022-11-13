@@ -142,4 +142,8 @@ public class Member extends BaseTimeEntity {
     public void isValidEmail() {
         this.emailValidatedAt = LocalDateTime.now();
     }
+
+    public void changeNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
