@@ -151,7 +151,7 @@ public class Member extends BaseTimeEntity {
         this.nickname = nickname;
     }
 
-    private void validateNickname(String nickname) {
+    public void validateNickname(String nickname) {
         Assert.isTrue(nickname.length() <= NAME_MAX_LENGTH, "닉네임의 최대 길이를 초과했습니다.");
     }
 }

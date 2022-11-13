@@ -20,9 +20,13 @@ public class ParentSignUpService implements SignUpService {
     @Override
     public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
+
         ParentDetail parentDetail = ParentDetail.createParentDetail(signUpInfo.getParentDetailInfo());
         parentDetail.validateYear(signUpInfo.getParentDetailInfo().getYear());
+
         Member newParent = Member.ParentSignUp(uuid, signUpInfo, parentDetail);
+        newParent.validateNickname(newParent.getNickname());
+
         Member savedParent = memberStore.store(newParent);
         return savedParent.getUuid();
     }
