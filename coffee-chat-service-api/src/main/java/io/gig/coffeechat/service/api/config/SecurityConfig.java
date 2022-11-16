@@ -1,6 +1,5 @@
 package io.gig.coffeechat.service.api.config;
 
-import com.google.firebase.auth.FirebaseAuth;
 import io.gig.coffeechat.domain.member.auth.AuthServiceImpl;
 import io.gig.coffeechat.service.api.filter.FirebaseTokenFilter;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
         http.authorizeRequests()
                 .antMatchers("/api/health-check", "/api/members/sign-up/**", "/api/email-verify", "/api/nickname-verify")
                 .permitAll()
@@ -43,9 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-
-        http.csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Bean

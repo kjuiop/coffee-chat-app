@@ -4,9 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import io.gig.coffeechat.service.api.util.properties.FirebaseSdkProperty;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +12,8 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
 import javax.annotation.PostConstruct;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author : JAKE
@@ -32,10 +30,8 @@ public class FirebaseConfig {
 
     @PostConstruct
     public FirebaseApp initializeFCM() throws IOException {
-        Resource resource = new ClassPathResource(sdkPath);
-        FileInputStream fis = new FileInputStream(resource.getFile());
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(fis))
+                .setCredentials(GoogleCredentials.fromStream(getFirebaseInfo()))
                 .build();
         firebaseApp = FirebaseApp.initializeApp(options);
         return firebaseApp;
@@ -45,5 +41,13 @@ public class FirebaseConfig {
     public FirebaseAuth initFirebaseAuth() {
         FirebaseAuth instance = FirebaseAuth.getInstance(firebaseApp);
         return instance;
+    }
+
+    private InputStream getFirebaseInfo() throws IOException {
+        Resource resource = new ClassPathResource(sdkPath);
+        if (resource.exists()) {
+            return resource.getInputStream();
+        }
+        throw new RuntimeException("firebase 키가 존재하지 않습니다.");
     }
 }
