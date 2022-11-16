@@ -16,6 +16,6 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
 
-firebas:
+firebase:
   sdk:
     path: config/chat-app-firebase-adminsdk.json
