@@ -4,7 +4,7 @@ import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.service.api.dto.member.SignUpDto;
 import io.gig.coffeechat.service.api.dto.member.SignUpDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
-import io.gig.coffeechat.service.api.utils.ApiResponse;
+import io.gig.coffeechat.service.api.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -26,7 +26,7 @@ public class SignUpController {
     private final SignUpDtoMapper signUpDtoMapper;
     private final MemberFacade memberFacade;
 
-    @PostMapping("{uuid}/sign-up")
+    @PostMapping("sign-up/{uuid}")
     @ResponseBody
     public ResponseEntity<ApiResponse> signUp(
             @PathVariable(name = "uuid") String uuid,
