@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ValidateRequestHeader {
 
+    private static final String AUTHORIZATION = "Authorization";
+
     public static String getAuthorizationToken(String header) {
         if (StringUtils.isEmpty(header)) {
             throw new IllegalArgumentException("Invalid authorization header");
@@ -30,6 +32,10 @@ public class ValidateRequestHeader {
 
     public static String getAuthorizationToken(HttpServletRequest request) {
         return getAuthorizationToken(request.getHeader("Authorization"));
+    }
+
+    public static Boolean checkAuthorization(HttpServletRequest request) {
+        return request.getHeader(AUTHORIZATION) == null;
     }
 
 }

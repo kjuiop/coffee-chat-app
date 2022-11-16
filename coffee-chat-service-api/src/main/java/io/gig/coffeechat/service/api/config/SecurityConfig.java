@@ -1,8 +1,11 @@
 package io.gig.coffeechat.service.api.config;
 
 import com.google.firebase.auth.FirebaseAuth;
+import io.gig.coffeechat.domain.member.auth.AuthServiceImpl;
 import io.gig.coffeechat.service.api.filter.FirebaseTokenFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.RegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -28,11 +31,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final FirebaseTokenFilter firebaseTokenFilter;
-    private final FirebaseAuth firebaseAuth;
+    private final AuthServiceImpl authService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/api/health-check", "/api/members/sign-up/**", "/api/email-verify", "/api/nickname-verify")
+                .permitAll()
                 .anyRequest().authenticated().and()
                 .addFilterBefore(firebaseTokenFilter,
                         UsernamePasswordAuthenticationFilter.class)
@@ -43,10 +48,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
+    @Bean
+    public RegistrationBean firebaseAuthTokenRegister(FirebaseTokenFilter filter) {
+        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
+        registrationBean.setEnabled(false);
+        return registrationBean;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(authService);
+    }
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers("/api/health-check")
                 .antMatchers("/resources/**");
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

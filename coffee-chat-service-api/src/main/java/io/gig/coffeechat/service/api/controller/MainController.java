@@ -5,14 +5,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author : JAKE
- * @date : 2022/11/09
+ * @date : 2022/11/16
  */
 @RestController
-public class HealthCheckController {
+public class MainController {
 
-    @GetMapping("/health-check")
+    @GetMapping("health-check")
     public String healthCheck() {
         return "Status is ok";
     }
-
 }

@@ -26,7 +26,7 @@ public class SignUpController {
     private final SignUpDtoMapper signUpDtoMapper;
     private final MemberFacade memberFacade;
 
-    @PostMapping("{uuid}/sign-up")
+    @PostMapping("sign-up/{uuid}")
     @ResponseBody
     public ResponseEntity<ApiResponse> signUp(
             @PathVariable(name = "uuid") String uuid,
