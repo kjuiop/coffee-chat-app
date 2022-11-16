@@ -73,6 +73,6 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
     private void setUnauthorizedResponse(HttpServletResponse response, String code) throws IOException {
         response.setStatus(HttpStatus.SC_UNAUTHORIZED);
         response.setContentType("application/json");
-        response.getWriter().write("{\"code\":\"INVALID_TOKEN\"\"}");
+        response.getWriter().write("{\"code\":\"INVALID_TOKEN\"}");
     }
 }
