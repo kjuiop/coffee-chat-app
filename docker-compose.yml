@@ -10,6 +10,23 @@ services:
       - TZ=Asia/Seoul
     ports:
       - "5432:5432"
+    networks:
+      - coffee-chat-network
+  service-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: coffee-chat-service-api
+    image: kjuiop/coffee-chat-service-api:1.0.1
+    ports:
+      - "8080:8080"
+    networks:
+      - coffee-chat-network
+
+networks:
+  coffee-chat-network:
+    driver: bridge
+
 
 # docker exec -it postgres /bin/bash
 # psql -U postgres
