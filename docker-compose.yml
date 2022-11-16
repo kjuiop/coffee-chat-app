@@ -15,7 +15,7 @@ services:
   service-api:
     build:
       context: .
-      dockerfile: Dockerfile-service
+      dockerfile: Dockerfile
     container_name: coffee-chat-service-api
     image: kjuiop/coffee-chat-service-api:1.0.1
     ports:
