@@ -9,3 +9,4 @@ coffee-chat-service-api/build
 coffee-chat-external-api/build
 coffee-chat-domain/build
 
+coffee-chat-service-api/src/main/resources/config/

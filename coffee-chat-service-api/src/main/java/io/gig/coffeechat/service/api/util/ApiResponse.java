@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.utils;
+package io.gig.coffeechat.service.api.util;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

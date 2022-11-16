@@ -3,7 +3,7 @@ package io.gig.coffeechat.service.api.controller;
 import io.gig.coffeechat.service.api.dto.member.MemberDto;
 import io.gig.coffeechat.service.api.dto.member.MemberDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
-import io.gig.coffeechat.service.api.utils.ApiResponse;
+import io.gig.coffeechat.service.api.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
