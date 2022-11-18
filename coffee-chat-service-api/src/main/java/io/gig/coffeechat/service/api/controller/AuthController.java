@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("members")
 @RequiredArgsConstructor
-public class SignUpController {
+public class AuthController {
 
     private final SignUpDtoMapper signUpDtoMapper;
     private final MemberFacade memberFacade;
