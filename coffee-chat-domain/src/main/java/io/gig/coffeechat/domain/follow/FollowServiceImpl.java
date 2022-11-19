@@ -1,11 +1,16 @@
 package io.gig.coffeechat.domain.follow;
 
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberInfo;
+import io.gig.coffeechat.domain.member.MemberReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.security.InvalidParameterException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : JAKE
@@ -17,6 +22,20 @@ import java.security.InvalidParameterException;
 public class FollowServiceImpl implements FollowService {
 
     private final FollowStore followStore;
+    private final FollowReader followReader;
+    private final MemberReader memberReader;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Long> getFollowingMemberUuids(String uuid) {
+        Member findMember = memberReader.getMember(uuid);
+        List<Follow> followingList = followReader.getFollowingList(findMember.getId());
+        if (followingList.isEmpty()) {
+            return List.of();
+        }
+
+        return followingList.stream().map(Follow::getToMemberId).collect(Collectors.toList());
+    }
 
     @Override
     @Transactional

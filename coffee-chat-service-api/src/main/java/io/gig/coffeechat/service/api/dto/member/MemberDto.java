@@ -11,6 +11,14 @@ public class MemberDto {
 
     @Getter
     @Builder
+    public static class Main {
+        private final Long memberId;
+        private final String uuid;
+        private final String nickname;
+    }
+
+    @Getter
+    @Builder
     public static class ValidateResponse {
         private final Boolean isValid;
     }

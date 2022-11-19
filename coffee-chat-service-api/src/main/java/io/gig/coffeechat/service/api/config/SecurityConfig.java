@@ -52,15 +52,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//        http.authorizeRequests().anyRequest().permitAll();
-        http.authorizeRequests()
-                .antMatchers("/api/health-check", "/api/members/sign-up/**", "/api/email-verify", "/api/nickname-verify", "/api/members/firebase/**")
-                .permitAll()
-                .anyRequest().authenticated().and()
-                .addFilterBefore(firebaseTokenFilter,
-                        UsernamePasswordAuthenticationFilter.class)
-                .exceptionHandling()
-                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+        http.authorizeRequests().anyRequest().permitAll();
+//        http.authorizeRequests()
+//                .antMatchers("/api/health-check", "/api/members/sign-up/**", "/api/email-verify", "/api/nickname-verify", "/api/members/firebase/**")
+//                .permitAll()
+//                .anyRequest().authenticated().and()
+//                .addFilterBefore(firebaseTokenFilter,
+//                        UsernamePasswordAuthenticationFilter.class)
+//                .exceptionHandling()
+//                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
     @Bean

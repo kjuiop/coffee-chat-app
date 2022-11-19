@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -21,6 +22,15 @@ import java.util.Optional;
 public class MemberQueryImpl implements MemberReader {
 
     private final MemberQueryRepository memberQueryRepository;
+
+    @Override
+    public List<Member> findAllByMemberIdsIn(List<Long> memberIds) {
+        if (memberIds.isEmpty())  {
+            return List.of();
+        }
+
+        return memberQueryRepository.findAllByIdIn(memberIds);
+    }
 
     @Override
     public Member getMember(String uuid) {
