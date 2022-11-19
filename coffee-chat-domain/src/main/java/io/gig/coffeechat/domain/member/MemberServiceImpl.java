@@ -17,6 +17,13 @@ public class MemberServiceImpl implements MemberService {
     private final MemberReader memberReader;
     private final MemberStore memberStore;
 
+
+    @Override
+    public MemberInfo.Main getMember(String uuid) {
+        Member findMember = memberReader.getMember(uuid);
+        return new MemberInfo.Main(findMember.getId(), findMember.getUuid(), findMember.getNickname());
+    }
+
     @Override
     @Transactional
     public boolean login(MemberCommand.SignIn request) {

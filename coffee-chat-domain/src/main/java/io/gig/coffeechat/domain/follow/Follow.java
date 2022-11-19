@@ -1,6 +1,7 @@
 package io.gig.coffeechat.domain.follow;
 
 import io.gig.coffeechat.domain.common.BaseTimeEntity;
+import io.gig.coffeechat.domain.member.MemberInfo;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,7 @@ public class Follow extends BaseTimeEntity {
 
     private Long toMemberId;
 
-    public static Follow CreateFollow(FollowCommand.FromFollow fromMember, FollowCommand.ToFollow toMember) {
+    public static Follow CreateFollow(MemberInfo.Main fromMember, MemberInfo.Main toMember) {
         return Follow.builder()
                 .fromMemberId(fromMember.getMemberId())
                 .toMemberId(toMember.getMemberId())
