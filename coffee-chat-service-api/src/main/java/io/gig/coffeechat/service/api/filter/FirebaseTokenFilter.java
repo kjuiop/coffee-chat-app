@@ -45,30 +45,19 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
         String token;
         try {
             token = ValidateRequestHeader.getAuthorizationToken(request);
-        } catch (IllegalArgumentException e) {
-            setUnauthorizedResponse(response, "INVALID_TOKEN");
-            return;
-        }
-
-        try {
             decodedToken = firebaseAuth.verifyIdToken(token);
-        } catch (FirebaseAuthException e) {
-            setUnauthorizedResponse(response, "INVALID_TOKEN");
-            return;
-        }
-
-        if (decodedToken == null) {
-            setUnauthorizedResponse(response, "INVALID_TOKEN");
-            return;
-        }
-
-        // User를 가져와 SecurityContext에 저장한다.
-        try{
             UserDetails user = authService.loadUserByUsername(decodedToken.getUid());
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                     user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch(NoSuchElementException e){
+
+        } catch (IllegalArgumentException e) {
+            setUnauthorizedResponse(response, "HEADER INVALID_TOKEN");
+            return;
+        } catch (FirebaseAuthException e) {
+            setUnauthorizedResponse(response, "FIREBASE INVALID_TOKEN");
+            return;
+        } catch (NoSuchElementException e) {
             setUnauthorizedResponse(response, "USER_NOT_FOUND");
             return;
         }
