@@ -5,6 +5,7 @@ import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,7 @@ import java.io.InputStream;
  * @author : JAKE
  * @date : 2022/11/16
  */
+@Slf4j
 @Configuration
 @RequiredArgsConstructor
 public class FirebaseConfig {
@@ -33,7 +35,10 @@ public class FirebaseConfig {
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(getFirebaseInfo()))
                 .build();
-        firebaseApp = FirebaseApp.initializeApp(options);
+        if (FirebaseApp.getApps().isEmpty()) {
+            firebaseApp = FirebaseApp.initializeApp(options);
+            log.info("Firebase application has been initialized");
+        }
         return firebaseApp;
     }
 
