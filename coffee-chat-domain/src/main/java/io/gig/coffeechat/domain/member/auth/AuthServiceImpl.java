@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.AccessDeniedException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,6 +28,7 @@ public class AuthServiceImpl implements UserDetailsService {
     private final MemberQueryRepository memberQueryRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String uuid) throws UsernameNotFoundException {
 
         Optional<Member> findMember = memberQueryRepository.findByUuid(uuid);
@@ -44,5 +47,21 @@ public class AuthServiceImpl implements UserDetailsService {
         boolean accountNonLocked = true;
 
         return new LoginUser(member.getEmail(), "", loginEnabled, accountNonExpired, credentialNonExpired, accountNonLocked, roles, member);
+    }
+
+    @Transactional
+    public void validateLoginUser(String uid, String email) throws AccessDeniedException {
+        Optional<Member> findMember = memberQueryRepository.findByUuid(uid);
+        if (findMember.isEmpty()) {
+            throw new NotFoundException("존재하지 않는 회원입니다.");
+        }
+
+        Member member = findMember.get();
+
+        if (member.getEmail().equals(email)) {
+            return;
+        }
+
+        throw new AccessDeniedException("로그인한 계정이 일치하지 않습니다.");
     }
 }

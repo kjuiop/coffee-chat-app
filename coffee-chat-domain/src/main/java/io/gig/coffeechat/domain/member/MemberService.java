@@ -6,6 +6,7 @@ package io.gig.coffeechat.domain.member;
  */
 public interface MemberService {
 
+    boolean login(MemberCommand.SignIn request);
     boolean validateEmail(String email);
     boolean validateNickname(String nickname);
     void authMemberEmailValidate(String uuid);

@@ -31,6 +31,12 @@ public class MemberCommand {
 
     @Getter
     @Builder
+    public static class SignIn {
+        private final String uuid;
+    }
+
+    @Getter
+    @Builder
     public static class MenteeDetailInfo {
         private final StudentType studentType;
         private final Integer year;
