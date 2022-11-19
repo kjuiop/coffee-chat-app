@@ -21,6 +21,6 @@ public class FollowFacade {
     public boolean execute(FollowDto.FollowRequest request) {
         MemberInfo.Main fromMember = memberService.getMember(request.getFromMemberUuid());
         MemberInfo.Main toMember = memberService.getMember(request.getToMemberUuid());
-        return followService.create(fromMember, toMember);;
+        return followService.create(fromMember, toMember);
     }
 }
