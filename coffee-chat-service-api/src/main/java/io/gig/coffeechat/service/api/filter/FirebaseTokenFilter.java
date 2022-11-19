@@ -62,10 +62,10 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
             authService.validateLoginUser(decodedToken.getUid(), decodedToken.getEmail());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (IllegalArgumentException e) {
-            setUnauthorizedResponse(response, "HEADER INVA/**/LID_TOKEN");
+            setUnauthorizedResponse(response, "HEADER INVALID_TOKEN");
             return;
         } catch (FirebaseAuthException e) {
-            setUnauthorizedResponse(response, "FIREBASE INVALID_TOKEN");
+            setUnauthorizedResponse(response, "FIREBASE INVALID_TOKEN : " + e.getMessage());
             return;
         } catch (NoSuchElementException e) {
             setUnauthorizedResponse(response, "USER NOT FOUND");
