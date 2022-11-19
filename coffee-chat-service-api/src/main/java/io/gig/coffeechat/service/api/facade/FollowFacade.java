@@ -18,10 +18,9 @@ public class FollowFacade {
     private final MemberService memberService;
     private final FollowService followService;
 
-    public void execute(FollowDto.FollowRequest request) {
+    public boolean execute(FollowDto.FollowRequest request) {
         MemberInfo.Main fromMember = memberService.getMember(request.getFromMemberUuid());
         MemberInfo.Main toMember = memberService.getMember(request.getToMemberUuid());
-
-        followService.create(fromMember, toMember);
+        return followService.create(fromMember, toMember);;
     }
 }

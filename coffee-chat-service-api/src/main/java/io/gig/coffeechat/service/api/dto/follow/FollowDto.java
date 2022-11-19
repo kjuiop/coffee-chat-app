@@ -21,4 +21,10 @@ public class FollowDto {
         @NotNull(message = "toMemberUuid 는 필수값입니다.")
         private String toMemberUuid;
     }
+
+    @Getter
+    @Builder
+    public static class Response {
+        private final Boolean isOk;
+    }
 }

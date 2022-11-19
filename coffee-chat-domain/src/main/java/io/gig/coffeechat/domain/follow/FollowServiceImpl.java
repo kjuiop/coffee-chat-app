@@ -20,10 +20,11 @@ public class FollowServiceImpl implements FollowService {
 
     @Override
     @Transactional
-    public void create(MemberInfo.Main fromMember, MemberInfo.Main toMember) {
+    public boolean create(MemberInfo.Main fromMember, MemberInfo.Main toMember) {
         validateFollowRequest(fromMember.getUuid(), toMember.getUuid());
         Follow newFollow = Follow.CreateFollow(fromMember, toMember);
         followStore.store(newFollow);
+        return true;
     }
 
     private void validateFollowRequest(String fromUuid, String toUuid) {

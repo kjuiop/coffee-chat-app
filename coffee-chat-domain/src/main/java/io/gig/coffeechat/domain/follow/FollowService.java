@@ -8,6 +8,6 @@ import io.gig.coffeechat.domain.member.MemberInfo;
  */
 public interface FollowService {
 
-    void create(MemberInfo.Main fromMember, MemberInfo.Main toMember);
+    boolean create(MemberInfo.Main fromMember, MemberInfo.Main toMember);
 
 }
