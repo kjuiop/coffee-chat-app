@@ -15,5 +15,5 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface FollowDtoMapper {
 
-    FollowDto.Response of(Boolean result);
+    FollowDto.Response of(Boolean isOk);
 }
