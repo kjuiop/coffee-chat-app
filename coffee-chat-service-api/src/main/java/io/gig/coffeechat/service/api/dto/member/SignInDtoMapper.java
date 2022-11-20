@@ -1,25 +1,21 @@
 package io.gig.coffeechat.service.api.dto.member;
 
-import io.gig.coffeechat.domain.member.MemberInfo;
+import io.gig.coffeechat.domain.member.MemberCommand;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.List;
-
 /**
  * @author : JAKE
- * @date : 2022/11/12
+ * @date : 2022/11/18
  */
 @Mapper(
         componentModel = "spring",
         injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         unmappedTargetPolicy = ReportingPolicy.ERROR
 )
-public interface MemberDtoMapper {
+public interface SignInDtoMapper {
 
-    MemberDto.ValidateResponse of (Boolean isValid);
-
-    List<MemberDto.Main> of(List<MemberInfo.Main> members);
+    MemberCommand.SignIn of(SignInDto.SignIn request);
 
 }

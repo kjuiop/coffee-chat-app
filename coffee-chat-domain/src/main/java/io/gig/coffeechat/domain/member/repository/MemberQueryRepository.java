@@ -4,6 +4,7 @@ import io.gig.coffeechat.domain.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,4 +21,6 @@ public interface MemberQueryRepository extends JpaRepository<Member, Long> {
     boolean existsByNickname(String nickname);
 
     Optional<Member> findByUuid(String uuid);
+
+    List<Member> findAllByIdIn(List<Long> memberIds);
 }
