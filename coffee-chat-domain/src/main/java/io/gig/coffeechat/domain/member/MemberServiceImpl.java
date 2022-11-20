@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author : JAKE
@@ -16,6 +19,21 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberReader memberReader;
     private final MemberStore memberStore;
+
+
+    @Override
+    public List<MemberInfo.Main> getMembers(List<Long> memberIds) {
+        List<Member> members = memberReader.findAllByMemberIdsIn(memberIds);
+        return members.stream()
+                .map(member -> new MemberInfo.Main(member.getId(), member.getUuid(), member.getNickname())).
+                collect(Collectors.toList());
+    }
+
+    @Override
+    public MemberInfo.Main getMember(String uuid) {
+        Member findMember = memberReader.getMember(uuid);
+        return new MemberInfo.Main(findMember.getId(), findMember.getUuid(), findMember.getNickname());
+    }
 
     @Override
     @Transactional

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
+import io.gig.coffeechat.domain.exception.NotFoundException;
 import io.gig.coffeechat.domain.member.auth.AuthServiceImpl;
 import io.gig.coffeechat.service.api.util.ValidateRequestHeader;
 import lombok.RequiredArgsConstructor;
@@ -72,6 +73,9 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
             return;
         } catch (AccessDeniedException e) {
             setUnauthorizedResponse(response, "USER NOT MATCH MEMBER DATA");
+            return;
+        } catch (NotFoundException e) {
+            setUnauthorizedResponse(response, "USER NOT FOUND e : " + e.getMessage());
             return;
         }
 

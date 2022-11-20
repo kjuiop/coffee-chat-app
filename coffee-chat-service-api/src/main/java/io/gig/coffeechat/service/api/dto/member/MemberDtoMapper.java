@@ -1,8 +1,11 @@
 package io.gig.coffeechat.service.api.dto.member;
 
+import io.gig.coffeechat.domain.member.MemberInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
+
+import java.util.List;
 
 /**
  * @author : JAKE
@@ -16,5 +19,7 @@ import org.mapstruct.ReportingPolicy;
 public interface MemberDtoMapper {
 
     MemberDto.ValidateResponse of (Boolean isValid);
+
+    List<MemberDto.Main> of(List<MemberInfo.Main> members);
 
 }
