@@ -3,6 +3,7 @@ package io.gig.coffeechat.service.api.controller;
 import io.gig.coffeechat.domain.util.InitUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -20,7 +21,7 @@ public class MainController {
         return "Status is ok";
     }
 
-    @GetMapping("init-data")
+    @PostMapping("init-data")
     public String initData() {
         initUtils.initData();
         return "init Data Set OK";
