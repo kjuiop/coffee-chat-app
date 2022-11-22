@@ -9,6 +9,7 @@ import io.gig.coffeechat.domain.member.parent.ParentDetail;
 import io.gig.coffeechat.domain.member.types.GenderType;
 import io.gig.coffeechat.domain.member.types.UsageAuthorityType;
 import io.gig.coffeechat.domain.member.types.UserStatusType;
+import io.gig.coffeechat.domain.role.Role;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.util.Assert;
