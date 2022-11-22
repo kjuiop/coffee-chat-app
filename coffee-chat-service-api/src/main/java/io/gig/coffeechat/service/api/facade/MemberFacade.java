@@ -4,8 +4,12 @@ import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.MemberService;
 import io.gig.coffeechat.domain.member.SignUpService;
 import io.gig.coffeechat.domain.member.SignUpServiceFactory;
+import io.gig.coffeechat.domain.role.Role;
+import io.gig.coffeechat.domain.role.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * @author : JAKE
@@ -17,9 +21,11 @@ public class MemberFacade {
 
     private final SignUpServiceFactory signUpServiceFactory;
     private final MemberService memberService;
+    private final RoleService roleService;
 
     public String signUp(String uuid, MemberCommand.SignUp request) {
         SignUpService signUpService = signUpServiceFactory.create(request);
+
         return signUpService.signUp(uuid, request);
     }
 
