@@ -1,10 +1,15 @@
 package io.gig.coffeechat.domain.member.mentee;
 
 import io.gig.coffeechat.domain.member.*;
+import io.gig.coffeechat.domain.member.memberRole.MemberRole;
+import io.gig.coffeechat.domain.role.Role;
+import io.gig.coffeechat.domain.role.RoleReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.InvalidParameterException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author : JAKE
@@ -17,6 +22,8 @@ public class MenteeSignUpService implements SignUpService {
     private final MemberReader memberReader;
     private final MemberStore memberStore;
 
+    private final RoleReader roleReader;
+
     @Override
     public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
@@ -26,6 +33,10 @@ public class MenteeSignUpService implements SignUpService {
 
         Member newMentee = Member.MenteeSignUp(uuid, signUpInfo, menteeDetail);
         newMentee.validateNickname(newMentee.getNickname());
+
+        Role userRole = roleReader.findByRoleName("ROLE_USER");
+        MemberRole newRole = MemberRole.addMemberRole(newMentee, userRole);
+        newMentee.addRole(newRole);
 
         Member savedMentee = memberStore.store(newMentee);
         return savedMentee.getUuid();

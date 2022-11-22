@@ -9,4 +9,6 @@ public interface RoleReader {
     boolean isExistRole();
 
     boolean isExistByName(String name);
+
+    Role findByRoleName(String role_user);
 }

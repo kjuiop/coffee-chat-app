@@ -2,6 +2,7 @@ package io.gig.coffeechat.domain.member;
 
 import io.gig.coffeechat.domain.common.BaseTimeEntity;
 import io.gig.coffeechat.domain.common.YnType;
+import io.gig.coffeechat.domain.member.memberRole.MemberRole;
 import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
 import io.gig.coffeechat.domain.member.mentor.MentorDetail;
 import io.gig.coffeechat.domain.member.parent.ParentDetail;
@@ -15,6 +16,8 @@ import org.springframework.util.Assert;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -89,6 +92,10 @@ public class Member extends BaseTimeEntity {
     @JoinColumn(name = "parent_id")
     private ParentDetail parentDetail;
 
+    @Builder.Default
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
+    private Set<MemberRole> memberRoles = new HashSet<>();
+
     final private static Long NAME_MAX_LENGTH = 10L;
 
     public static Member MenteeSignUp(String uuid, MemberCommand.SignUp signUp, MenteeDetail menteeDetail) {
@@ -154,6 +161,10 @@ public class Member extends BaseTimeEntity {
     public void login() {
         LocalDateTime current = LocalDateTime.now();
         this.lastLoginAt = current;
+    }
+
+    public void addRole(MemberRole role) {
+        this.memberRoles.add(role);
     }
 
     public void validateNickname(String nickname) {
