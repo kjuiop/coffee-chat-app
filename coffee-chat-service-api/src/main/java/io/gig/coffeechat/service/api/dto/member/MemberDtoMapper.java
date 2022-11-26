@@ -1,5 +1,6 @@
 package io.gig.coffeechat.service.api.dto.member;
 
+import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.MemberInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
@@ -18,7 +19,9 @@ import java.util.List;
 )
 public interface MemberDtoMapper {
 
-    MemberDto.ValidateResponse of (Boolean isValid);
+    MemberDto.ValidateResponse of(Boolean isValid);
+
+    MemberCommand.ChangeNickname of(MemberDto.ChangeNicknameRequest request);
 
     List<MemberDto.Main> of(List<MemberInfo.Main> members);
 

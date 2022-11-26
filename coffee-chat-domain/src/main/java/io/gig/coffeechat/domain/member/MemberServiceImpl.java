@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member;
 
+import io.gig.coffeechat.domain.exception.AlreadyEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +21,8 @@ public class MemberServiceImpl implements MemberService {
     private final MemberReader memberReader;
     private final MemberStore memberStore;
 
-
     @Override
+    @Transactional(readOnly = true)
     public List<MemberInfo.Main> getMembers(List<Long> memberIds) {
         List<Member> members = memberReader.findAllByMemberIdsIn(memberIds);
         return members.stream()
@@ -30,9 +31,23 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberInfo.Main getMember(String uuid) {
         Member findMember = memberReader.getMember(uuid);
         return new MemberInfo.Main(findMember.getId(), findMember.getUuid(), findMember.getNickname());
+    }
+
+    @Override
+    @Transactional
+    public boolean changeNickname(String uuid, MemberCommand.ChangeNickname request) {
+        boolean isValid = validateNickname(request.getNickname());
+        if (!isValid) {
+            throw new InvalidParameterException("이미 등록된 닉네임입니다.");
+        }
+        Member findMember = memberReader.getMember(uuid);
+        findMember.changeNickname(request.getNickname());
+        memberStore.store(findMember);
+        return true;
     }
 
     @Override

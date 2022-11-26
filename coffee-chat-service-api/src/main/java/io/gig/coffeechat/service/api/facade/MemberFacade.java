@@ -6,6 +6,7 @@ import io.gig.coffeechat.domain.member.SignUpService;
 import io.gig.coffeechat.domain.member.SignUpServiceFactory;
 import io.gig.coffeechat.domain.role.Role;
 import io.gig.coffeechat.domain.role.RoleService;
+import io.gig.coffeechat.service.api.dto.member.MemberDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,6 @@ public class MemberFacade {
 
     private final SignUpServiceFactory signUpServiceFactory;
     private final MemberService memberService;
-    private final RoleService roleService;
 
     public String signUp(String uuid, MemberCommand.SignUp request) {
         SignUpService signUpService = signUpServiceFactory.create(request);
@@ -45,5 +45,7 @@ public class MemberFacade {
         return memberService.validateNickname(nickname);
     }
 
-
+    public boolean changeNickname(String uuid, MemberCommand.ChangeNickname request) {
+        return memberService.changeNickname(uuid, request);
+    }
 }

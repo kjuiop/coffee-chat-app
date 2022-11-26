@@ -97,7 +97,7 @@ public class Member extends BaseTimeEntity {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}, orphanRemoval = true)
     private Set<MemberRole> memberRoles = new HashSet<>();
 
-    final private static Long NAME_MAX_LENGTH = 10L;
+    final private static Long NAME_MAX_LENGTH = 12L;
 
     public static Member MenteeSignUp(String uuid, MemberCommand.SignUp signUp, MenteeDetail menteeDetail) {
         LocalDateTime current = LocalDateTime.now();

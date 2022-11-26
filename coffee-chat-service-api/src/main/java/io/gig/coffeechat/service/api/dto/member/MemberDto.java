@@ -2,6 +2,11 @@ package io.gig.coffeechat.service.api.dto.member;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author : JAKE
@@ -15,6 +20,12 @@ public class MemberDto {
         private final Long memberId;
         private final String uuid;
         private final String nickname;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class ChangeNicknameRequest {
+        private String nickname;
     }
 
     @Getter

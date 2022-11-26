@@ -1,5 +1,6 @@
 package io.gig.coffeechat.service.api.controller;
 
+import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.service.api.dto.member.MemberDto;
 import io.gig.coffeechat.service.api.dto.member.MemberDtoMapper;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -24,7 +26,20 @@ public class MemberController {
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
 
+    @PostMapping("members/{uuid}/nickname")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeNickname(
+            @PathVariable String uuid,
+            @RequestBody @Valid MemberDto.ChangeNicknameRequest request
+            ) {
+        MemberCommand.ChangeNickname memberCommand = memberDtoMapper.of(request);
+        boolean result = memberFacade.changeNickname(uuid, memberCommand);
+        MemberDto.ValidateResponse response = memberDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
     @PostMapping("members/{uuid}/email-auth")
+    @ResponseBody
     public ResponseEntity<ApiResponse> authEmailValidateCode(
             @PathVariable String uuid) {
         memberFacade.authMemberEmailValidate(uuid);
