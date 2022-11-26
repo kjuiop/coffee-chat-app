@@ -26,7 +26,7 @@ public class MemberController {
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
 
-    @PostMapping("members/{uuid}/nickname")
+    @PutMapping("members/{uuid}/nickname")
     @ResponseBody
     public ResponseEntity<ApiResponse> changeNickname(
             @PathVariable String uuid,
