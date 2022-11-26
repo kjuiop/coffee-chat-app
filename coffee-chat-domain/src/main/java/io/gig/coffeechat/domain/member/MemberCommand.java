@@ -37,6 +37,18 @@ public class MemberCommand {
 
     @Getter
     @Builder
+    public static class ChangeNickname {
+        private final String nickname;
+    }
+
+    @Getter
+    @Builder
+    public static class ChangeMarketingApprove {
+        private final String marketingAgreeYn;
+    }
+
+    @Getter
+    @Builder
     public static class MenteeDetailInfo {
         private final StudentType studentType;
         private final Integer year;
