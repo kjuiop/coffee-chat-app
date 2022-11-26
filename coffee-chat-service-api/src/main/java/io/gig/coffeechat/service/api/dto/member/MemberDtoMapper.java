@@ -23,6 +23,8 @@ public interface MemberDtoMapper {
 
     MemberCommand.ChangeNickname of(MemberDto.ChangeNicknameRequest request);
 
+    MemberCommand.ChangeMarketingApprove of(MemberDto.ChangeMarketingApproveRequest request);
+
     List<MemberDto.Main> of(List<MemberInfo.Main> members);
 
 }

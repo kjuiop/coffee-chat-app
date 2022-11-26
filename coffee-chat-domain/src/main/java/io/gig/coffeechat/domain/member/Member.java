@@ -159,6 +159,16 @@ public class Member extends BaseTimeEntity {
         this.nickname = nickname;
     }
 
+    public void changeMarketingApprove(String marketingApproveYn) {
+        if (YnType.Y == YnType.valueOf(marketingApproveYn)) {
+            LocalDateTime current = LocalDateTime.now();
+            this.marketingAgreementAt = current;
+            return;
+        }
+
+        this.marketingAgreementAt = null;
+    }
+
     public void login() {
         LocalDateTime current = LocalDateTime.now();
         this.lastLoginAt = current;

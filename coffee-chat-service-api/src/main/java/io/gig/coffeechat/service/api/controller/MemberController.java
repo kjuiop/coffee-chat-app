@@ -38,6 +38,18 @@ public class MemberController {
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
+    @PutMapping("members/{uuid}/marketing-approve")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeMarketingApprove(
+            @PathVariable String uuid,
+            @RequestBody @Valid MemberDto.ChangeMarketingApproveRequest request
+    ) {
+        MemberCommand.ChangeMarketingApprove memberCommand = memberDtoMapper.of(request);
+        boolean result = memberFacade.changeMarketingApprove(uuid, memberCommand);
+        MemberDto.ValidateResponse response = memberDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
     @PostMapping("members/{uuid}/email-auth")
     @ResponseBody
     public ResponseEntity<ApiResponse> authEmailValidateCode(

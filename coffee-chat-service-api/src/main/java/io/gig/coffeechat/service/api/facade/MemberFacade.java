@@ -48,4 +48,8 @@ public class MemberFacade {
     public boolean changeNickname(String uuid, MemberCommand.ChangeNickname request) {
         return memberService.changeNickname(uuid, request);
     }
+
+    public boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request) {
+        return memberService.changeMarketingApprove(uuid, request);
+    }
 }

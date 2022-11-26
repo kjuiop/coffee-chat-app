@@ -42,10 +42,18 @@ public class MemberServiceImpl implements MemberService {
     public boolean changeNickname(String uuid, MemberCommand.ChangeNickname request) {
         boolean isValid = validateNickname(request.getNickname());
         if (!isValid) {
-            throw new InvalidParameterException("이미 등록된 닉네임입니다.");
+            return false;
         }
         Member findMember = memberReader.getMember(uuid);
         findMember.changeNickname(request.getNickname());
+        memberStore.store(findMember);
+        return true;
+    }
+
+    @Override
+    public boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request) {
+        Member findMember = memberReader.getMember(uuid);
+        findMember.changeMarketingApprove(request.getMarketingAgreeYn());
         memberStore.store(findMember);
         return true;
     }

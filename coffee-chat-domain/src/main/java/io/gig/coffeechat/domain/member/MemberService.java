@@ -21,4 +21,6 @@ public interface MemberService {
     List<MemberInfo.Main> getMembers(List<Long> followingMemberIds);
 
     boolean changeNickname(String uuid, MemberCommand.ChangeNickname request);
+
+    boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request);
 }

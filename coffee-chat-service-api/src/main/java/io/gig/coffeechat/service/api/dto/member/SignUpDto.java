@@ -20,8 +20,6 @@ public class SignUpDto {
         @NotBlank(message = "email 은 필수값입니다.")
         private String email;
 
-        @Max(value = 12, message = "닉네임은 최대 12글자까지만 가능합니다.")
-        @Min(value = 1, message = "닉네임은 최소 1글자 이상 가능합니다.")
         @NotBlank(message = "nickname 은 필수값입니다.")
         private String nickname;
 
