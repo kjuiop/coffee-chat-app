@@ -1,17 +1,6 @@
 version: '3.6'
 
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:10
-    restart: unless-stopped
-    environment:
-      - POSTGRES_PASSWORD='1234'
-      - TZ=Asia/Seoul
-    ports:
-      - "5432:5432"
-    networks:
-      - coffee-chat-network
   service-api:
     build:
       context: .
@@ -20,12 +9,6 @@ services:
     image: kjuiop/coffee-chat-service-api:1.0.1
     ports:
       - "8080:8080"
-    networks:
-      - coffee-chat-network
-
-networks:
-  coffee-chat-network:
-    driver: bridge
 
 
 # docker exec -it postgres /bin/bash

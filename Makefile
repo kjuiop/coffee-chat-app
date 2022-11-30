@@ -10,7 +10,7 @@ SERVICE_PID_NAME=coffee-chat-service-api.jar
 SERVICE_API_DIR=./coffee-chat-service-api/build/libs/
 SERVICE_API_PID=coffee-chat-service-api.jar
 
-service-api: config build_num boot_jar move_jar
+service-api: config boot_jar move_jar
 
 config:
 	@if [ ! -d $(TARGET_DIR) ]; then mkdir $(TARGET_DIR); fi
