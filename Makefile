@@ -31,12 +31,16 @@ give_chmod:
 	sudo chmod +x ./docker/service-api/docker_build.sh
 	sudo chmod +x ./docker/service-api/docker_push.sh
 	sudo chmod +x ./docker/service-api/docker_run.sh
+	sudo chmod +x ./docker/ecr/ecr_access.sh
+
+ecr_access:
+	bash -c ./docker/ecr/ecr_access.sh
 
 docker_build:
-	bash -c ./docker/service-api/docker_build.sh
+	docker-compose -f docker-compose.yml build service-api
 
 docker_push:
-	bash -c ./docker/service-api/docker_push.sh
+	docker-compose -f docker-compose.yml push service-api
 
 docker_run:
 	bash -c ./docker/service-api/docker_run.sh

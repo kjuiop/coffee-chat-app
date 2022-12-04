@@ -4,15 +4,8 @@ services:
   service-api:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-service
     container_name: coffee-chat-service-api
-    image: kjuiop/coffee-chat-service-api:1.0.1
+    image: 340651985871.dkr.ecr.ap-northeast-2.amazonaws.com/coffee-chat:1.0.1
     ports:
       - "8080:8080"
-
-
-# docker exec -it postgres /bin/bash
-# psql -U postgres
-# create database coffee_chat
-# alter role postgres with password '1234'
-
