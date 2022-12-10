@@ -38,15 +38,17 @@ public class AuthServiceImpl implements UserDetailsService {
 
         Member member = findMember.get();
 
-        List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
+        Set<GrantedAuthority> authorities = member.getMemberRoles()
+                .stream()
+                .map(r -> new SimpleGrantedAuthority(r.getRole().getName()))
+                .collect(Collectors.toSet());
 
         boolean loginEnabled = true;
         boolean accountNonExpired = true;
         boolean credentialNonExpired = true;
         boolean accountNonLocked = true;
 
-        return new LoginUser(member.getEmail(), "", loginEnabled, accountNonExpired, credentialNonExpired, accountNonLocked, roles, member);
+        return new LoginUser(member.getEmail(), "", loginEnabled, accountNonExpired, credentialNonExpired, accountNonLocked, authorities, member);
     }
 
     @Transactional

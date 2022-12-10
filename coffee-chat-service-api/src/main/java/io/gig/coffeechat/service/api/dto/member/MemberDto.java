@@ -1,7 +1,9 @@
 package io.gig.coffeechat.service.api.dto.member;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author : JAKE
@@ -15,6 +17,18 @@ public class MemberDto {
         private final Long memberId;
         private final String uuid;
         private final String nickname;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class ChangeNicknameRequest {
+        private String nickname;
+    }
+
+    @Getter
+    @NoArgsConstructor
+    public static class ChangeMarketingApproveRequest {
+        private String marketingAgreeYn;
     }
 
     @Getter
