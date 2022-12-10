@@ -4,15 +4,18 @@
 # bin
 /bin
 
+# Project build
+coffee-chat-service-api/build
+coffee-chat-external-api/build
+coffee-chat-domain/build
+coffee-chat-service-discovery/build
+coffee-chat-api-gateway/build
+
 # Project exclude paths
 /.gradle/
 .gradle
 
 docker/ecr/
-
-coffee-chat-service-api/build
-coffee-chat-external-api/build
-coffee-chat-domain/build
 
 coffee-chat-service-api/src/main/resources/config/
 coffee-chat-service-api/src/main/resources/application-dev.yml

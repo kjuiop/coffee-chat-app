@@ -1,22 +1,17 @@
-package io.gig.coffeechat.service.api;
+package io.gig.coffeechat.external.api;
 
-import io.gig.coffeechat.domain.config.ComponentConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.context.annotation.Import;
 
 /**
  * @author : JAKE
- * @date : 2022/11/09
+ * @date : 2022/12/10
  */
-@Import(ComponentConfig.class)
 @EnableDiscoveryClient
 @SpringBootApplication
-public class ServiceApiApplication {
-
+public class ExternalApiApplication {
     public static void main(String[] args) {
-        SpringApplication.run(ServiceApiApplication.class, args);
+        SpringApplication.run(ExternalApiApplication.class, args);
     }
-
 }
