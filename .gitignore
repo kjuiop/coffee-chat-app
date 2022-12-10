@@ -3,6 +3,7 @@
 
 # bin
 /bin
+coffee-chat-service-discovery/bin
 
 # Project build
 coffee-chat-service-api/build
