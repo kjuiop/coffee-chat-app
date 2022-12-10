@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8090
   servlet:
     encoding:
       charset: UTF-8
@@ -14,17 +14,7 @@ eureka:
 
 spring:
   application:
-    name: service-api
-  profiles:
-    active: local
+    name: extneral-api
   main:
     allow-bean-definition-overriding: true
 
-  servlet:
-    multipart:
-      max-file-size: 10MB
-      max-request-size: 10MB
-
-firebase:
-  sdk:
-    path: config/chat-app-firebase-adminsdk.json

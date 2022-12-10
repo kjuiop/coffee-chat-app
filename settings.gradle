@@ -1,3 +1,4 @@
 rootProject.name = 'coffee-chat-app'
 include 'coffee-chat-domain', 'coffee-chat-service-api', 'coffee-chat-external-api'
+include 'coffee-chat-service-discovery'
 
