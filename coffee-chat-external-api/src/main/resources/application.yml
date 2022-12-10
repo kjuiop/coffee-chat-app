@@ -14,7 +14,7 @@ eureka:
 
 spring:
   application:
-    name: extneral-api
+    name: external-api
   main:
     allow-bean-definition-overriding: true
 

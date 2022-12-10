@@ -20,7 +20,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     /* spring cloud */
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
     /* test */
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
