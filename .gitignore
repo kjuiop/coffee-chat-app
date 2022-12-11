@@ -2,14 +2,10 @@
 .idea
 
 # bin
-/bin
+bin
 
 # Project build
-coffee-chat-service-api/build
-coffee-chat-external-api/build
-coffee-chat-domain/build
-coffee-chat-service-discovery/build
-coffee-chat-api-gateway/build
+build
 
 # Project exclude paths
 /.gradle/
