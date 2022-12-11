@@ -1,9 +1,9 @@
 TARGET_DIR=./bin
 TARGET_BACKUP_DIR=./bin/backup
 
-BUILD_NUM=$$(cat docker/build_num.txt)
+BUILD_NUM=$$(cat deploy/build_num.txt)
 BUILD_NUM_FILE=docker/build_num.txt
-VERSION_NUM=$$(cat docker/version.txt)
+VERSION_NUM=$$(cat deploy/version.txt)
 
 MODULE_NAME=coffee-chat-service-api
 APP_DIR=./build/libs
