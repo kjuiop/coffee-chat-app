@@ -26,10 +26,10 @@ move_jar:
 	cp $(APP_DIR)/$(APP_PID) $(TARGET_BACKUP_DIR)/$(VERSION_NUM).$(BUILD_NUM)_$(APP_PID)
 
 docker_build:
-	sudo docker build --platform amd64 --tag kjuiop/coffee-chat-service-discovery:1.0.1 .
+	sudo docker build --platform amd64 --tag kjuiop/$(MODULE_NAME):1.0.1 .
 
 docker_push:
-	sudo docker push kjuiop/coffee-chat-service-discovery:1.0.1
+	sudo docker push kjuiop/$(MODULE_NAME):$(VERSION_NUM).$(BUILD_NUM)
 
 clean:
 	rm -rf $(TARGET_DIR)/*.jar
