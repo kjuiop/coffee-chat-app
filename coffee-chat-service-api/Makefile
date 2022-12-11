@@ -10,7 +10,7 @@ APP_DIR=./build/libs
 APP_PID=coffee-chat-service-api.jar
 DOCKER_REPOSITORY=kjuiop
 
-service-discovery: config boot_jar move_jar
+service-api: config boot_jar move_jar
 
 config:
 	@if [ ! -d $(TARGET_DIR) ]; then mkdir $(TARGET_DIR); fi
