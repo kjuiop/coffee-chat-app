@@ -7,6 +7,49 @@
 
 <br />
 
+
+## Build
+
+---
+
+Tortee-Api 는 Makefile 을 활용한 컨테이너 기반 빌드를 차용합니다.
+
+Docker 에 배포되는 기준 Jar 파일은 해당 모듈의 bin 디렉터리에 위치하며,
+Version 변경 시에는 bin/backup 으로 이동됩니다.
+
+Jar 파일을 Git 으로 별도 형상관리를 하지는 않습니다.
+
+~~~ shell
+
+# 배포하고자 하는 모듈로 이동
+cd coffee-chat-service-api
+
+# 빌드 자동화 명령 실행
+make 
+
+# docker build 
+make docker_build
+
+# docker push
+make docker_push
+
+~~~
+
+Tortee-Api 는 버전관리를 build_num.txt , version.txt 를 통해 직접 관리하고 있습니다.
+
+~~~ shell
+
+# build_num  version up
+make build_bun
+
+# 빌드된 이전 버전 파일 삭제
+make clean
+
+~~~
+
+
+<br />
+
 ## Git Flow
 
 ---
