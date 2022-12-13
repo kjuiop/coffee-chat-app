@@ -29,12 +29,14 @@ public class AttachmentController {
     public ResponseEntity<ApiResponse> upload(
             @RequestParam(value = "file") MultipartFile multipartFile,
             @RequestParam(value = "usageType") String usageType,
+            @RequestParam(value = "fileType") String fileType,
             @RequestParam(value = "uuid") String uuid
             ) {
 
         AttachmentDto.Request request = AttachmentDto.Request.builder()
                 .multipartFile(multipartFile)
                 .usageType(usageType)
+                .fileType(fileType)
                 .uuid(uuid)
                 .build();
 

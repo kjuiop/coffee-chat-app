@@ -15,6 +15,7 @@ public class AttachmentDto {
     public static class Request {
         private MultipartFile multipartFile;
         private String usageType;
+        private String fileType;
         private String uuid;
     }
 

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @RequiredArgsConstructor
-public class AttachmentService {
+public class ImageUploadService implements UploadService {
 
-    public void create(AttachmentInfo.Main result) {
+    @Override
+    public AttachmentInfo.Main upload(AttachmentCommand.Upload request) {
+        return null;
     }
 }

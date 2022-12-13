@@ -1,8 +1,6 @@
 package io.gig.coffeechat.service.api.facade;
 
-import io.gig.coffeechat.domain.attachment.AttachmentCommand;
-import io.gig.coffeechat.domain.attachment.AttachmentInfo;
-import io.gig.coffeechat.domain.attachment.AttachmentService;
+import io.gig.coffeechat.domain.attachment.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,10 +12,14 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AttachmentFacade {
 
+    private final UploadServiceFactory uploadServiceFactory;
     private final AttachmentService attachmentService;
 
     public AttachmentInfo.Main upload(AttachmentCommand.Upload request) {
-        return attachmentService.upload(request);
+        UploadService uploadService = uploadServiceFactory.create(request.getFileType());
+        AttachmentInfo.Main result = uploadService.upload(request);
+        attachmentService.create(result);
+        return result;
     }
 
 

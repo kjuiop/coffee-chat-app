@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.attachment;
 
+import io.gig.coffeechat.domain.attachment.types.FileType;
 import io.gig.coffeechat.domain.attachment.types.UsageType;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,5 +18,6 @@ public class AttachmentCommand {
         private MultipartFile multipartFile;
         private UsageType usageType;
         private String uuid;
+        private FileType fileType;
     }
 }
