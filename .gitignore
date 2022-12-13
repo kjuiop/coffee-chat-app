@@ -11,6 +11,9 @@ build
 /.gradle/
 .gradle
 
+# credential
+application-credentials.yml
+
 docker/ecr/
 
 coffee-chat-service-api/src/main/resources/config/
