@@ -12,5 +12,8 @@ import org.springframework.stereotype.Service;
 public class AttachmentService {
 
     public void create(AttachmentInfo.Main result) {
+        Attachment newAttachment = Attachment.Of(result.getUsageType(), result.getFileType(), result.getUuid(),
+                result.getOriginalFilename(), result.getSavedFilename(), result.getFullPath());
+
     }
 }

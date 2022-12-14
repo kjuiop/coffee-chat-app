@@ -47,6 +47,8 @@ public class ImageUploadService implements UploadService {
 
             return AttachmentInfo.Main.builder()
                     .fileType(FileType.Image)
+                    .usageType(request.getUsageType())
+                    .uuid(request.getUuid())
                     .originalFilename(originalFilename)
                     .savedFilename(saveFileName)
                     .fullPath(saveFilePath)
