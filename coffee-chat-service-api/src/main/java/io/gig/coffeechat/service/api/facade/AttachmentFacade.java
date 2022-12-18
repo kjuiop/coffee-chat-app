@@ -13,14 +13,13 @@ import org.springframework.stereotype.Service;
 public class AttachmentFacade {
 
     private final UploadServiceFactory uploadServiceFactory;
-    private final AttachmentService attachmentService;
+    private final AttachmentServiceImpl attachmentServiceImpl;
 
     public AttachmentInfo.Main upload(AttachmentCommand.Upload request) {
         UploadService uploadService = uploadServiceFactory.create(request.getFileType());
         AttachmentInfo.Main result = uploadService.upload(request);
-        attachmentService.create(result);
+        attachmentServiceImpl.create(result);
         return result;
     }
-
 
 }
