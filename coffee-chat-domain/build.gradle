@@ -30,6 +30,9 @@ dependencies {
     /* file */
     implementation group: 'commons-io', name: 'commons-io', version: '2.6'
 
+    /* aws */
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.11.228'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'
 }

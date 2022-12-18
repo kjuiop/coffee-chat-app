@@ -5,6 +5,7 @@ import io.gig.coffeechat.domain.attachment.utils.FileManager;
 import io.gig.coffeechat.domain.attachment.utils.S3UploadUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -24,13 +25,11 @@ public class ImageUploadService implements UploadService {
     private final FileManager fileManager;
 
     @Override
+    @Transactional
     public AttachmentInfo.Main upload(AttachmentCommand.Upload request) {
 
         MultipartFile mf = request.getMultipartFile();
-        String foldDlv = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMM"));
-        String filePath = request.getUsageType().getType() + File.separator +  request.getFileType() + File.separator + foldDlv;
-
-        S3UploadUtils.createBucketFolder();
+        String filePath = request.getUuid() + File.separator + request.getUsageType().getType() + File.separator +  request.getFileType();
 
         long time = System.currentTimeMillis();
         String originalFilename = mf.getOriginalFilename();

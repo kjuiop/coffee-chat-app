@@ -17,10 +17,8 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "aws.s3")
 @PropertySource(value="classpath:/application-credentials.yml", factory = YamlPropertySourceFactory.class)
 public class S3Properties {
-    String endPoint;
-    String regionName;
+    String region;
     String bucketName;
     String accessKey;
     String secretKey;
-    String prefixUrl;
 }

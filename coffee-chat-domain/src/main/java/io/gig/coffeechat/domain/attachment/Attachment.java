@@ -18,7 +18,7 @@ import javax.persistence.*;
 @Getter
 @SuperBuilder
 @Entity
-@Table(name = "members")
+@Table(name = "attachments")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Attachment extends BaseTimeEntity {
