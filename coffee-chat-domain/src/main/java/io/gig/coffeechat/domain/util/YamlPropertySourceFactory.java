@@ -1,4 +1,4 @@
-package io.gig.coffeechat.service.api.util;
+package io.gig.coffeechat.domain.util;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
