@@ -51,6 +51,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional
+    public boolean changeProfileImage(String uuid, MemberCommand.ChangeProfileImage request) {
+        Member findMember = memberReader.getMember(uuid);
+        findMember.changeProfileImage(request.getProfileImageUrl());
+        memberStore.store(findMember);
+        return true;
+    }
+
+    @Override
     public boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request) {
         Member findMember = memberReader.getMember(uuid);
         findMember.changeMarketingApprove(request.getMarketingAgreeYn());

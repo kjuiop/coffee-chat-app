@@ -59,6 +59,9 @@ public class Member extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private UsageAuthorityType usageAuthority;
 
+    @Column(length = 1000)
+    private String profileImageUrl;
+
     @Builder.Default
     @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -157,6 +160,10 @@ public class Member extends BaseTimeEntity {
     public void changeNickname(String nickname) {
         validateNickname(nickname);
         this.nickname = nickname;
+    }
+
+    public void changeProfileImage(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
     }
 
     public void changeMarketingApprove(String marketingApproveYn) {
