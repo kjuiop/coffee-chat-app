@@ -8,4 +8,5 @@ public interface ParentService {
 
     boolean changeSchoolName(String uuid, ParentCommand.ChangeSchoolName request);
 
+    boolean changeYear(String uuid, ParentCommand.ChangeYear request);
 }

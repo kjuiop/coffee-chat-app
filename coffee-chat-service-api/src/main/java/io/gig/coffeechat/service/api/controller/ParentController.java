@@ -39,4 +39,16 @@ public class ParentController {
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
+    @PutMapping("year")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeYear(
+            @PathVariable String uuid,
+            @RequestBody @Valid ParentDto.ChangeYearRequest request
+    ) {
+        ParentCommand.ChangeYear parentCommand = parentDtoMapper.of(request);
+        boolean result = parentFacade.changeYear(uuid, parentCommand);
+        ParentDto.Response response = parentDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
 }

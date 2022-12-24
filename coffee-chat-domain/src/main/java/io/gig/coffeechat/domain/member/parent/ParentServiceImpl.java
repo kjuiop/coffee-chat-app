@@ -28,4 +28,16 @@ public class ParentServiceImpl implements ParentService {
 
         return true;
     }
+
+    @Override
+    @Transactional
+    public boolean changeYear(String uuid, ParentCommand.ChangeYear request) {
+
+        Member findMember = memberReader.getMember(uuid);
+        ParentDetail findParentDetail = findMember.getParentDetail();
+        findParentDetail.changeYear(request.getYear());
+        parentStore.store(findParentDetail);
+
+        return true;
+    }
 }

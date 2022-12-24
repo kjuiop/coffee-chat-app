@@ -18,6 +18,8 @@ public interface ParentDtoMapper {
 
     ParentCommand.ChangeSchoolName of(ParentDto.ChangeSchoolNameRequest request);
 
+    ParentCommand.ChangeYear of(ParentDto.ChangeYearRequest request);
+
     ParentDto.Response of(Boolean isOk);
 
 }
