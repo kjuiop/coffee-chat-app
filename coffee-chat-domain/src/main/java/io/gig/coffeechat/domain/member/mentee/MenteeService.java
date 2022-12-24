@@ -8,4 +8,5 @@ public interface MenteeService {
 
     boolean changeSchoolName(String uuid, MenteeCommand.ChangeSchoolName request);
 
+    boolean changeYear(String uuid, MenteeCommand.ChangeYear request);
 }

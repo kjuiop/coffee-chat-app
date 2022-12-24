@@ -17,6 +17,12 @@ public class MenteeDto {
     }
 
     @Getter
+    @NoArgsConstructor
+    public static class ChangeYearRequest {
+        private Integer year;
+    }
+
+    @Getter
     @Builder
     public static class Response {
         private final Boolean isOk;

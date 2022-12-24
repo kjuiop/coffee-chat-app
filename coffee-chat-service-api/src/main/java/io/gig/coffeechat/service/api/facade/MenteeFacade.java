@@ -18,4 +18,8 @@ public class MenteeFacade {
     public boolean changeSchoolName(String uuid, MenteeCommand.ChangeSchoolName request) {
         return menteeService.changeSchoolName(uuid, request);
     }
+
+    public boolean changeYear(String uuid, MenteeCommand.ChangeYear request) {
+        return menteeService.changeYear(uuid, request);
+    }
 }

@@ -26,6 +26,17 @@ public class MenteeServiceImpl implements MenteeService {
         findMenteeDetail.changeSchoolName(request.getSchoolName());
         menteeStore.store(findMenteeDetail);
 
-        return false;
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean changeYear(String uuid, MenteeCommand.ChangeYear request) {
+
+        Member findMember = memberReader.getMember(uuid);
+        MenteeDetail findMenteeDetail = findMember.getMenteeDetail();
+        findMenteeDetail.changeYear(request.getYear());
+        menteeStore.store(findMenteeDetail);
+        return true;
     }
 }

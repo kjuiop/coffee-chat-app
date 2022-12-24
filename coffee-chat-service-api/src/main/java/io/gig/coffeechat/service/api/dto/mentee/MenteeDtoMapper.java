@@ -18,6 +18,8 @@ public interface MenteeDtoMapper {
 
     MenteeCommand.ChangeSchoolName of(MenteeDto.ChangeSchoolNameRequest request);
 
+    MenteeCommand.ChangeYear of(MenteeDto.ChangeYearRequest request);
+
     MenteeDto.Response of(Boolean isOk);
 
 }

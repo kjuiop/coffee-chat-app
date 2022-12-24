@@ -38,4 +38,16 @@ public class MenteeController {
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
+    @PutMapping("year")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeYear(
+            @PathVariable String uuid,
+            @RequestBody @Valid MenteeDto.ChangeYearRequest request
+    ) {
+        MenteeCommand.ChangeYear menteeCommand = menteeDtoMapper.of(request);
+        boolean result = menteeFacade.changeYear(uuid, menteeCommand);
+        MenteeDto.Response response = menteeDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
 }
