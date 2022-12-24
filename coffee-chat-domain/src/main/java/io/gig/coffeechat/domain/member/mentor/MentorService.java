@@ -8,4 +8,5 @@ public interface MentorService {
 
     boolean changeSchoolName(String uuid, MentorCommand.ChangeSchoolName request);
 
+    boolean changeYear(String uuid, MentorCommand.ChangeYear request);
 }

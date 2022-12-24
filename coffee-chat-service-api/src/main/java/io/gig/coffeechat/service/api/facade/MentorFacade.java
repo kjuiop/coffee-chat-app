@@ -20,4 +20,7 @@ public class MentorFacade {
         return mentorService.changeSchoolName(uuid, request);
     }
 
+    public boolean changeYear(String uuid, MentorCommand.ChangeYear request) {
+        return mentorService.changeYear(uuid, request);
+    }
 }

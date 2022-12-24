@@ -40,4 +40,16 @@ public class MentorController {
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 
+    @PutMapping("year")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeYear(
+            @PathVariable String uuid,
+            @RequestBody @Valid MentorDto.ChangeYearRequest request
+    ) {
+        MentorCommand.ChangeYear mentorCommand = mentorDtoMapper.of(request);
+        boolean result = mentorFacade.changeYear(uuid, mentorCommand);
+        MentorDto.Response response = mentorDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
 }

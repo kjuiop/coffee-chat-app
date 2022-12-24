@@ -31,5 +31,15 @@ public class MentorServiceImpl implements MentorService {
         return true;
     }
 
+    @Override
+    @Transactional
+    public boolean changeYear(String uuid, MentorCommand.ChangeYear request) {
 
+        Member findMember = memberReader.getMember(uuid);
+        MentorDetail findMentorDetail = findMember.getMentorDetail();
+        findMentorDetail.changeYear(request.getYear());
+        mentorStore.store(findMentorDetail);
+
+        return true;
+    }
 }

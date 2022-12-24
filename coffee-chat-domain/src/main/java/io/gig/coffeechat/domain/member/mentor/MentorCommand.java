@@ -15,4 +15,10 @@ public class MentorCommand {
         private final String schoolName;
     }
 
+    @Getter
+    @Builder
+    public static class ChangeYear {
+        private final Integer year;
+    }
+
 }

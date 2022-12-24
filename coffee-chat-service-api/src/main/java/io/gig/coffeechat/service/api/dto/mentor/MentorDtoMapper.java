@@ -18,5 +18,7 @@ public interface MentorDtoMapper {
 
     MentorCommand.ChangeSchoolName of(MentorDto.ChangeSchoolNameRequest request);
 
+    MentorCommand.ChangeYear of(MentorDto.ChangeYearRequest request);
+
     MentorDto.Response of(Boolean isOk);
 }
