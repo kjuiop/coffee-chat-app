@@ -37,6 +37,7 @@ public class MentorServiceImpl implements MentorService {
 
         Member findMember = memberReader.getMember(uuid);
         MentorDetail findMentorDetail = findMember.getMentorDetail();
+        findMentorDetail.validateYear(request.getYear());
         findMentorDetail.changeYear(request.getYear());
         mentorStore.store(findMentorDetail);
 

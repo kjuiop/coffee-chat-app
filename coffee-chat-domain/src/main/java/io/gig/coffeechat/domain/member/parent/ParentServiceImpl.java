@@ -35,6 +35,7 @@ public class ParentServiceImpl implements ParentService {
 
         Member findMember = memberReader.getMember(uuid);
         ParentDetail findParentDetail = findMember.getParentDetail();
+        findParentDetail.validateYear(request.getYear());
         findParentDetail.changeYear(request.getYear());
         parentStore.store(findParentDetail);
 

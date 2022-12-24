@@ -35,6 +35,7 @@ public class MenteeServiceImpl implements MenteeService {
 
         Member findMember = memberReader.getMember(uuid);
         MenteeDetail findMenteeDetail = findMember.getMenteeDetail();
+        findMenteeDetail.validateYear(request.getYear());
         findMenteeDetail.changeYear(request.getYear());
         menteeStore.store(findMenteeDetail);
         return true;
