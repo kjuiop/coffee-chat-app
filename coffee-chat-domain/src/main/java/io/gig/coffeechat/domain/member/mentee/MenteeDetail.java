@@ -48,6 +48,10 @@ public class MenteeDetail {
                 .build();
     }
 
+    public void changeSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
     public void validateYear(Integer year) {
         Assert.isTrue(year <= YEAR_MAX_VALUE, "학년 정보를 다시 입력해주세요.");
     }
