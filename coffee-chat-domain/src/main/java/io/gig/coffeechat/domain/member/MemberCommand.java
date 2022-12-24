@@ -43,6 +43,12 @@ public class MemberCommand {
 
     @Getter
     @Builder
+    public static class ChangeProfileImage {
+        private final String profileImageUrl;
+    }
+
+    @Getter
+    @Builder
     public static class ChangeMarketingApprove {
         private final String marketingAgreeYn;
     }

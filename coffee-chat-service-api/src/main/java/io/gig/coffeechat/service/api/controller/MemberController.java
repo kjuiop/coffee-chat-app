@@ -26,6 +26,18 @@ public class MemberController {
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
 
+    @PostMapping("members/{uuid}/profile-image")
+    @ResponseBody
+    public ResponseEntity<ApiResponse> changeProfileImage(
+            @PathVariable String uuid,
+            @RequestBody @Valid MemberDto.ChangeProfileImageRequest request
+    ) {
+        MemberCommand.ChangeProfileImage memberCommand = memberDtoMapper.of(request);
+        boolean result = memberFacade.changeProfileImage(uuid, memberCommand);
+        MemberDto.ValidateResponse response = memberDtoMapper.of(result);
+        return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
+    }
+
     @PutMapping("members/{uuid}/nickname")
     @ResponseBody
     public ResponseEntity<ApiResponse> changeNickname(

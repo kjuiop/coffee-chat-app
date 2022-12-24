@@ -32,6 +32,12 @@ public class MemberDto {
     }
 
     @Getter
+    @NoArgsConstructor
+    public static class ChangeProfileImageRequest {
+        private String profileImageUrl;
+    }
+
+    @Getter
     @Builder
     public static class ValidateResponse {
         private final Boolean isValid;

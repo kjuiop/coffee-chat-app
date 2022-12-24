@@ -49,6 +49,10 @@ public class MemberFacade {
         return memberService.changeNickname(uuid, request);
     }
 
+    public boolean changeProfileImage(String uuid, MemberCommand.ChangeProfileImage request) {
+        return memberService.changeProfileImage(uuid, request);
+    }
+
     public boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request) {
         return memberService.changeMarketingApprove(uuid, request);
     }
