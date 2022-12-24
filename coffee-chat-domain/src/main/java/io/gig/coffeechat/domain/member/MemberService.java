@@ -22,5 +22,7 @@ public interface MemberService {
 
     boolean changeNickname(String uuid, MemberCommand.ChangeNickname request);
 
+    boolean changeProfileImage(String uuid, MemberCommand.ChangeProfileImage request);
+
     boolean changeMarketingApprove(String uuid, MemberCommand.ChangeMarketingApprove request);
 }

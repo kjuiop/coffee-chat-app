@@ -49,7 +49,17 @@ public class ParentDetail {
                 .build();
     }
 
+    public void changeSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
+    public void changeYear(Integer year) {
+        this.year = year;
+    }
+
     public void validateYear(Integer year) {
         Assert.isTrue(year <= YEAR_MAX_VALUE, "자녀의 학년 정보를 다시 입력해주세요.");
     }
+
+
 }

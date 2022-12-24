@@ -1,6 +1,6 @@
 package io.gig.coffeechat.service.api.util.properties;
 
-import io.gig.coffeechat.service.api.util.YamlPropertySourceFactory;
+import io.gig.coffeechat.domain.util.YamlPropertySourceFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
