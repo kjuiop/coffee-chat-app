@@ -33,7 +33,10 @@ public class MentorDetail {
     private Long id;
 
     @Column(nullable = false)
-    private String schoolName;
+    private String university;
+
+    @Column(nullable = false)
+    private String highSchool;
 
     @Column(nullable = false)
     private Integer year;
@@ -51,15 +54,19 @@ public class MentorDetail {
 
     public static MentorDetail createMentorDetail(MemberCommand.MentorDetailInfo info) {
         return MentorDetail.builder()
-                .schoolName(info.getSchoolName())
+                .university(info.getUniversity())
                 .year(info.getYear())
                 .studentNo(info.getStudentNo())
                 .major(info.getMajor())
                 .build();
     }
 
-    public void changeSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void changeUniversity(String university) {
+        this.university = university;
+    }
+
+    public void changeHighSchool(String highSchool) {
+        this.highSchool = highSchool;
     }
 
     public void changeYear(Integer year) {

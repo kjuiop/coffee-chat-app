@@ -16,7 +16,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface MentorDtoMapper {
 
-    MentorCommand.ChangeSchoolName of(MentorDto.ChangeSchoolNameRequest request);
+    MentorCommand.ChangeUniversity of(MentorDto.ChangeUniversityRequest request);
 
     MentorCommand.ChangeYear of(MentorDto.ChangeYearRequest request);
 

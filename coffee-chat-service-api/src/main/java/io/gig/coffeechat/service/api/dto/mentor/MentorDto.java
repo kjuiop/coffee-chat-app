@@ -12,8 +12,8 @@ public class MentorDto {
 
     @Getter
     @NoArgsConstructor
-    public static class ChangeSchoolNameRequest {
-        private String schoolName;
+    public static class ChangeUniversityRequest {
+        private String university;
     }
 
     @Getter

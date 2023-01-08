@@ -11,8 +11,8 @@ public class MenteeCommand {
 
     @Getter
     @Builder
-    public static class ChangeSchoolName {
-        private final String schoolName;
+    public static class ChangeHighSchool {
+        private final String highSchool;
     }
 
     @Getter

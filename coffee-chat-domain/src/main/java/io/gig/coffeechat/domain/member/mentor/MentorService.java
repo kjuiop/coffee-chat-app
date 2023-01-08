@@ -6,7 +6,7 @@ package io.gig.coffeechat.domain.member.mentor;
  */
 public interface MentorService {
 
-    boolean changeSchoolName(String uuid, MentorCommand.ChangeSchoolName request);
+    boolean changeUniversity(String uuid, MentorCommand.ChangeUniversity request);
 
     boolean changeYear(String uuid, MentorCommand.ChangeYear request);
 }

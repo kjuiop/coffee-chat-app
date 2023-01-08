@@ -6,7 +6,7 @@ package io.gig.coffeechat.domain.member.mentee;
  */
 public interface MenteeService {
 
-    boolean changeSchoolName(String uuid, MenteeCommand.ChangeSchoolName request);
+    boolean changeHighSchool(String uuid, MenteeCommand.ChangeHighSchool request);
 
     boolean changeYear(String uuid, MenteeCommand.ChangeYear request);
 }

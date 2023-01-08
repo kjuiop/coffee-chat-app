@@ -11,8 +11,8 @@ public class MentorCommand {
 
     @Getter
     @Builder
-    public static class ChangeSchoolName {
-        private final String schoolName;
+    public static class ChangeUniversity {
+        private final String university;
     }
 
     @Getter

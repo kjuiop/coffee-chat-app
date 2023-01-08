@@ -16,7 +16,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface ParentDtoMapper {
 
-    ParentCommand.ChangeSchoolName of(ParentDto.ChangeSchoolNameRequest request);
+    ParentCommand.ChangeHighSchool of(ParentDto.ChangeHighSchoolRequest request);
 
     ParentCommand.ChangeYear of(ParentDto.ChangeYearRequest request);
 

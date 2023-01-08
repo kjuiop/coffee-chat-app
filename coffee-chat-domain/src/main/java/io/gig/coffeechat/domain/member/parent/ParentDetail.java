@@ -38,7 +38,7 @@ public class ParentDetail {
     private Integer year;
 
     @Column(nullable = false)
-    private String schoolName;
+    private String highSchool;
 
     @OneToOne(mappedBy = "parentDetail")
     private Member member;
@@ -49,12 +49,12 @@ public class ParentDetail {
         return ParentDetail.builder()
                 .studentType(info.getStudentType())
                 .year(info.getYear())
-                .schoolName(info.getSchoolName())
+                .highSchool(info.getHighSchool())
                 .build();
     }
 
-    public void changeSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void changeHighSchool(String highSchool) {
+        this.highSchool = highSchool;
     }
 
     public void changeYear(Integer year) {
