@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member.mentee;
 
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.types.StudentType;
 import lombok.AccessLevel;
@@ -37,6 +38,9 @@ public class MenteeDetail {
 
     @Column(nullable = false)
     private String schoolName;
+
+    @OneToOne(mappedBy = "menteeDetail")
+    private Member member;
 
     private static Long YEAR_MAX_VALUE = 3L;
 

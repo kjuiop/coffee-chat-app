@@ -1,6 +1,8 @@
 package io.gig.coffeechat.domain.member.mentor;
 
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +12,8 @@ import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.security.InvalidParameterException;
+
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * @author : JAKE
@@ -39,6 +43,9 @@ public class MentorDetail {
 
     @Column(nullable = false)
     private String major;
+
+    @OneToOne(mappedBy = "mentorDetail")
+    private Member member;
 
     private static Long YEAR_MAX_VALUE = 4L;
 

@@ -1,5 +1,6 @@
 package io.gig.coffeechat.domain.member.parent;
 
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberCommand;
 import io.gig.coffeechat.domain.member.types.StudentType;
 import lombok.AccessLevel;
@@ -38,6 +39,9 @@ public class ParentDetail {
 
     @Column(nullable = false)
     private String schoolName;
+
+    @OneToOne(mappedBy = "parentDetail")
+    private Member member;
 
     private static Long YEAR_MAX_VALUE = 3L;
 
