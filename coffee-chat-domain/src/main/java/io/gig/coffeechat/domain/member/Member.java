@@ -65,6 +65,11 @@ public class Member extends BaseTimeEntity {
     @Builder.Default
     @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
     @Enumerated(EnumType.STRING)
+    private YnType disableYn = YnType.N;
+
+    @Builder.Default
+    @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
+    @Enumerated(EnumType.STRING)
     private YnType deleteYn = YnType.N;
 
     @Builder.Default
