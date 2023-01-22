@@ -42,4 +42,8 @@ public class MemberRole extends BaseTimeEntity {
                 .build();
     }
 
+    public String getRoleName() {
+        return this.role.getName();
+    }
+
 }

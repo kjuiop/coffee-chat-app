@@ -1,9 +1,6 @@
 package io.gig.coffeechat.service.api.facade;
 
-import io.gig.coffeechat.domain.member.MemberCommand;
-import io.gig.coffeechat.domain.member.MemberService;
-import io.gig.coffeechat.domain.member.SignUpService;
-import io.gig.coffeechat.domain.member.SignUpServiceFactory;
+import io.gig.coffeechat.domain.member.*;
 import io.gig.coffeechat.domain.role.Role;
 import io.gig.coffeechat.domain.role.RoleService;
 import io.gig.coffeechat.service.api.dto.member.MemberDto;
@@ -23,9 +20,8 @@ public class MemberFacade {
     private final SignUpServiceFactory signUpServiceFactory;
     private final MemberService memberService;
 
-    public String signUp(String uuid, MemberCommand.SignUp request) {
+    public MemberInfo.Main signUp(String uuid, MemberCommand.SignUp request) {
         SignUpService signUpService = signUpServiceFactory.create(request);
-
         return signUpService.signUp(uuid, request);
     }
 

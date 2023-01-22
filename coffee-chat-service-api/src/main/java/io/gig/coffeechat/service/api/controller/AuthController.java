@@ -1,8 +1,10 @@
 package io.gig.coffeechat.service.api.controller;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.domain.member.MemberInfo;
 import io.gig.coffeechat.service.api.dto.member.*;
 import io.gig.coffeechat.service.api.facade.MemberFacade;
+import io.gig.coffeechat.service.api.jwt.TokenProvider;
 import io.gig.coffeechat.service.api.util.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class AuthController {
     private final SignInDtoMapper signInDtoMapper;
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
+    private final TokenProvider tokenProvider;
 
     @PostMapping("sign-up/{uuid}")
     @ResponseBody
@@ -33,8 +36,8 @@ public class AuthController {
             @PathVariable(name = "uuid") String uuid,
             @RequestBody @Valid SignUpDto.SignUp request) {
         MemberCommand.SignUp memberCommand = signUpDtoMapper.of(request);
-        String signUpToken = memberFacade.signUp(uuid, memberCommand);
-        SignUpDto.SignUpResponse response = signUpDtoMapper.of(signUpToken);
+        MemberInfo.Main memberInfo = memberFacade.signUp(uuid, memberCommand);
+        SignUpDto.SignUpResponse response = signUpDtoMapper.of(memberInfo);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.CREATED);
     }
 

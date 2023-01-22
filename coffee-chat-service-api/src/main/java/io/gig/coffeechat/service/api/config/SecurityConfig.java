@@ -65,7 +65,8 @@ public class SecurityConfig {
                 /* HttpServletRequest 를 사용하는 요청들에 대한 접근 제한 설정 */
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/health-check").permitAll()
+                .antMatchers("/api/health-check", "/api/sign-up/**", "/init-data")
+                .permitAll()
 
                 /* JwtSecurityConfig 적용 */
                 .and()

@@ -1,6 +1,7 @@
 package io.gig.coffeechat.service.api.dto.member;
 
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.domain.member.MemberInfo;
 import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -18,5 +19,5 @@ public interface SignUpDtoMapper {
 
     MemberCommand.SignUp of(SignUpDto.SignUp request);
 
-    SignUpDto.SignUpResponse of(String signUpToken);
+    SignUpDto.SignUpResponse of(MemberInfo.Main memberInfo);
 }
