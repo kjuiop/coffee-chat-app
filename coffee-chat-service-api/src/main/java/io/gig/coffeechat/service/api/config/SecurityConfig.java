@@ -67,6 +67,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers("/api/health-check", "/api/sign-up/**", "/init-data")
                 .permitAll()
+                .anyRequest().authenticated()
 
                 /* JwtSecurityConfig 적용 */
                 .and()

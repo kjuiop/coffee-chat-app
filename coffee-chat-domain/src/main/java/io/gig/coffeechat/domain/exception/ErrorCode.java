@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public enum ErrorCode {
 
-    UNAUTHORIZED_USER(403, "Unauthorized user");
+    UNAUTHORIZED_USER(403, "접근에 대한 권한이 없습니다.");
 
     private int status;
 
