@@ -8,10 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.security.InvalidParameterException;
+import java.util.List;
+import java.util.Map;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -46,6 +49,14 @@ public class MentorDetail {
 
     @Column(nullable = false)
     private String major;
+
+    private String admission;
+
+    @Column(length = 1000)
+    private String introduction;
+
+    @Column(length = 1000)
+    private String experience;
 
     @OneToOne(mappedBy = "mentorDetail")
     private Member member;
