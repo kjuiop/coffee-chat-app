@@ -19,13 +19,13 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     @Transactional
-    public boolean changeSchoolName(String uuid, MentorCommand.ChangeSchoolName request) {
+    public boolean changeUniversity(String uuid, MentorCommand.ChangeUniversity request) {
 
         // 회원이 Mentor 인지 Validation
 
         Member findMember = memberReader.getMember(uuid);
         MentorDetail findMentorDetail = findMember.getMentorDetail();
-        findMentorDetail.changeSchoolName(request.getSchoolName());
+        findMentorDetail.changeUniversity(request.getUniversity());
         mentorStore.store(findMentorDetail);
 
         return true;

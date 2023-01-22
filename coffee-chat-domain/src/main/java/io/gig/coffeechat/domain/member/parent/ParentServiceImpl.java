@@ -19,11 +19,11 @@ public class ParentServiceImpl implements ParentService {
 
     @Override
     @Transactional
-    public boolean changeSchoolName(String uuid, ParentCommand.ChangeSchoolName request) {
+    public boolean changeHighSchool(String uuid, ParentCommand.ChangeHighSchool request) {
 
         Member findMember = memberReader.getMember(uuid);
         ParentDetail findParentDetail = findMember.getParentDetail();
-        findParentDetail.changeSchoolName(request.getSchoolName());
+        findParentDetail.changeHighSchool(request.getHighSchool());
         parentStore.store(findParentDetail);
 
         return true;

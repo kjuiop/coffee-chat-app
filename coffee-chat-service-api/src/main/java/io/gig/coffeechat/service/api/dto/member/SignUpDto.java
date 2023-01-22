@@ -45,8 +45,11 @@ public class SignUpDto {
     @Builder
     public static class MentorDetailInfo {
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "university 은 필수값입니다.")
+        private String university;
+
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;
@@ -65,8 +68,8 @@ public class SignUpDto {
         @NotBlank(message = "studentType 은 필수값입니다.")
         private String studentType;
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;
@@ -80,8 +83,8 @@ public class SignUpDto {
         @NotBlank(message = "studentType 은 필수값입니다.")
         private String studentType;
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;

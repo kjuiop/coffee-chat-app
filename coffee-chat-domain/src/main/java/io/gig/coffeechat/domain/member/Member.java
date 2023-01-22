@@ -84,15 +84,15 @@ public class Member extends BaseTimeEntity {
 
     private LocalDateTime marketingAgreementAt;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "mentee_id")
     private MenteeDetail menteeDetail;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "mentor_id")
     private MentorDetail mentorDetail;
 
-    @ManyToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(fetch = LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "parent_id")
     private ParentDetail parentDetail;
 

@@ -1,15 +1,22 @@
 package io.gig.coffeechat.domain.member.mentor;
 
+import io.gig.coffeechat.domain.member.Member;
 import io.gig.coffeechat.domain.member.MemberCommand;
+import io.gig.coffeechat.domain.member.mentee.MenteeDetail;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Type;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
 import java.security.InvalidParameterException;
+import java.util.List;
+import java.util.Map;
+
+import static javax.persistence.FetchType.LAZY;
 
 /**
  * @author : JAKE
@@ -29,7 +36,10 @@ public class MentorDetail {
     private Long id;
 
     @Column(nullable = false)
-    private String schoolName;
+    private String university;
+
+    @Column(nullable = false)
+    private String highSchool;
 
     @Column(nullable = false)
     private Integer year;
@@ -40,19 +50,34 @@ public class MentorDetail {
     @Column(nullable = false)
     private String major;
 
+    private String admission;
+
+    @Column(length = 1000)
+    private String introduction;
+
+    @Column(length = 1000)
+    private String experience;
+
+    @OneToOne(mappedBy = "mentorDetail")
+    private Member member;
+
     private static Long YEAR_MAX_VALUE = 4L;
 
     public static MentorDetail createMentorDetail(MemberCommand.MentorDetailInfo info) {
         return MentorDetail.builder()
-                .schoolName(info.getSchoolName())
+                .university(info.getUniversity())
                 .year(info.getYear())
                 .studentNo(info.getStudentNo())
                 .major(info.getMajor())
                 .build();
     }
 
-    public void changeSchoolName(String schoolName) {
-        this.schoolName = schoolName;
+    public void changeUniversity(String university) {
+        this.university = university;
+    }
+
+    public void changeHighSchool(String highSchool) {
+        this.highSchool = highSchool;
     }
 
     public void changeYear(Integer year) {

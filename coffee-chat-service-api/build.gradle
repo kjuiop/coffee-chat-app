@@ -32,6 +32,9 @@ dependencies {
     /* spring cloud */
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
+    /* json format rds data */
+    implementation 'com.vladmihalcea:hibernate-types-52:2.9.13'
+
     /* test */
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.1'

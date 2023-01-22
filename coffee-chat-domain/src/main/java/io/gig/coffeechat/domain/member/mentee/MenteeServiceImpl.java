@@ -19,11 +19,11 @@ public class MenteeServiceImpl implements MenteeService {
 
     @Override
     @Transactional
-    public boolean changeSchoolName(String uuid, MenteeCommand.ChangeSchoolName request) {
+    public boolean changeHighSchool(String uuid, MenteeCommand.ChangeHighSchool request) {
 
         Member findMember = memberReader.getMember(uuid);
         MenteeDetail findMenteeDetail = findMember.getMenteeDetail();
-        findMenteeDetail.changeSchoolName(request.getSchoolName());
+        findMenteeDetail.changeHighSchool(request.getHighSchool());
         menteeStore.store(findMenteeDetail);
 
         return true;

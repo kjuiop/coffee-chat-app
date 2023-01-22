@@ -16,11 +16,12 @@ public class MentorFacade {
 
     private final MentorService mentorService;
 
-    public boolean changeSchoolName(String uuid, MentorCommand.ChangeSchoolName request) {
-        return mentorService.changeSchoolName(uuid, request);
+    public boolean changeUniversity(String uuid, MentorCommand.ChangeUniversity request) {
+        return mentorService.changeUniversity(uuid, request);
     }
 
     public boolean changeYear(String uuid, MentorCommand.ChangeYear request) {
         return mentorService.changeYear(uuid, request);
     }
+
 }

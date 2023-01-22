@@ -12,8 +12,8 @@ public class MenteeDto {
 
     @Getter
     @NoArgsConstructor
-    public static class ChangeSchoolNameRequest {
-        private String schoolName;
+    public static class ChangeHighSchoolRequest {
+        private String highSchool;
     }
 
     @Getter
