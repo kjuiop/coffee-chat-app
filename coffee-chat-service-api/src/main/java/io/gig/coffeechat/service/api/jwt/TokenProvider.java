@@ -59,12 +59,16 @@ public class TokenProvider implements InitializingBean {
                 .setSubject(uid)
                 .claim("roles", roles)
                 .signWith(key, SignatureAlgorithm.HS512)
-                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_TIME))
+                .setExpiration(new Date(System.currentTimeMillis() + REFRESH_TOKEN_VALID_TIME))
                 .compact();
     }
 
     /* 인증 정보 조회 */
     public Authentication getAuthentication(String token) {
+
+        if (!validateToken(token)) {
+            return null;
+        }
 
         Claims claims = Jwts.parserBuilder()
                 .setSigningKey(key)
