@@ -47,8 +47,8 @@ public class AuthController {
             @RequestBody @Valid SignInDto.SignIn request
     ) {
         MemberCommand.SignIn memberCommand = signInDtoMapper.of(request);
-        boolean validateToken = memberFacade.login(memberCommand);
-        MemberDto.ValidateResponse response = memberDtoMapper.of(validateToken);
+        MemberInfo.TokenInfo tokenInfo = memberFacade.login(memberCommand);
+        MemberDto.TokenResponse response = memberDtoMapper.of(tokenInfo);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }
 }

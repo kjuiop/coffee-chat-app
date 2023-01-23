@@ -34,7 +34,7 @@ public class MemberServiceImpl implements MemberService {
     @Transactional(readOnly = true)
     public MemberInfo.Main getMember(String uuid) {
         Member findMember = memberReader.getMember(uuid);
-        return new MemberInfo.Main(findMember.getId(), findMember.getUuid(), findMember.getNickname());
+        return new MemberInfo.Main(findMember);
     }
 
     @Override
@@ -69,9 +69,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     @Transactional
-    public boolean login(MemberCommand.SignIn request) {
+    public boolean login(MemberCommand.SignIn request, String refreshToken) {
         Member findMember = memberReader.getMember(request.getUuid());
-        findMember.login();
+        findMember.login(refreshToken);
         memberStore.store(findMember);
         return true;
     }

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -91,16 +92,16 @@ public class TokenProvider implements InitializingBean {
             return true;
         } catch (io.jsonwebtoken.security.SignatureException | MalformedJwtException e) {
             logger.error("잘못된 JWT 서명입니다.");
-            return false;
+            throw new AccessDeniedException("잘못된 JWT 서명입니다.");
         } catch (ExpiredJwtException e) {
             logger.error("만료된 JWT 토큰입니다.");
-            return false;
+            throw new AccessDeniedException("만료된 JWT 토큰입니다.");
         } catch (UnsupportedJwtException e) {
             logger.error("지원하지 않는 JWT 토큰입니다.");
-            return false;
+            throw new AccessDeniedException("지원하지 않는 JWT 토큰입니다.");
         } catch (IllegalArgumentException e) {
             logger.error("JWT 토큰이 잘못되었습니다.");
-            return false;
+            throw new AccessDeniedException("JWT 토큰이 잘못되었습니다.");
         }
     }
 

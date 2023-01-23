@@ -31,8 +31,16 @@ public class MemberFacade {
         return memberInfo;
     }
 
-    public boolean login(MemberCommand.SignIn request) {
-        return memberService.login(request);
+    public MemberInfo.TokenInfo login(MemberCommand.SignIn request) {
+        MemberInfo.Main memberInfo = memberService.getMember(request.getUuid());
+        String accessToken = tokenProvider.createAccessToken(memberInfo.getUuid(), memberInfo.getRoles());
+        String refreshToken = tokenProvider.createRefreshToken(memberInfo.getUuid(), memberInfo.getRoles());
+
+        boolean isLogin = memberService.login(request, refreshToken);
+        if (!isLogin) {
+            return null;
+        }
+        return new MemberInfo.TokenInfo(accessToken, refreshToken);
     }
 
     public void authMemberEmailValidate(String uuid) {

@@ -45,6 +45,13 @@ public class MemberDto {
 
     @Getter
     @Builder
+    public static class TokenResponse {
+        private final String accessToken;
+        private final String refreshToken;
+    }
+
+    @Getter
+    @Builder
     public static class Response {
         private final Boolean isOk;
     }
