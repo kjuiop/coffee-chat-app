@@ -23,14 +23,19 @@ dependencies {
     /* validation */
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    /* firebase sdk */
-    implementation group: 'com.google.firebase', name: 'firebase-admin', version: '7.1.0'
-
     /* security */
     implementation 'org.springframework.boot:spring-boot-starter-security'
 
+    /* jwt */
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+    runtimeOnly group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
     /* spring cloud */
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    /* json format rds data */
+    implementation 'com.vladmihalcea:hibernate-types-52:2.9.13'
 
     /* test */
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'

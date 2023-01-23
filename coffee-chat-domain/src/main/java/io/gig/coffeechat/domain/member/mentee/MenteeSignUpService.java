@@ -6,6 +6,7 @@ import io.gig.coffeechat.domain.role.Role;
 import io.gig.coffeechat.domain.role.RoleReader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
 import java.util.HashSet;
@@ -25,7 +26,8 @@ public class MenteeSignUpService implements SignUpService {
     private final RoleReader roleReader;
 
     @Override
-    public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
+    @Transactional
+    public MemberInfo.Main signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
 
         MenteeDetail menteeDetail = MenteeDetail.createMenteeDetail(signUpInfo.getMenteeDetailInfo());
@@ -39,7 +41,7 @@ public class MenteeSignUpService implements SignUpService {
         newMentee.addRole(newRole);
 
         Member savedMentee = memberStore.store(newMentee);
-        return savedMentee.getUuid();
+        return new MemberInfo.Main(savedMentee);
     }
 
     private void validateSignUp(String uuid, String email, String nickname) {

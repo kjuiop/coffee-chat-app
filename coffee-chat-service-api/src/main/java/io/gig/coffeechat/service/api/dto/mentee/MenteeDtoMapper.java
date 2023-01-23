@@ -16,7 +16,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface MenteeDtoMapper {
 
-    MenteeCommand.ChangeSchoolName of(MenteeDto.ChangeSchoolNameRequest request);
+    MenteeCommand.ChangeHighSchool of(MenteeDto.ChangeHighSchoolRequest request);
 
     MenteeCommand.ChangeYear of(MenteeDto.ChangeYearRequest request);
 

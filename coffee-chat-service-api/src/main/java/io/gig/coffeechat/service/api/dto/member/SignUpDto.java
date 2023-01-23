@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author : JAKE
@@ -45,8 +46,11 @@ public class SignUpDto {
     @Builder
     public static class MentorDetailInfo {
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "university 은 필수값입니다.")
+        private String university;
+
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;
@@ -65,8 +69,8 @@ public class SignUpDto {
         @NotBlank(message = "studentType 은 필수값입니다.")
         private String studentType;
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;
@@ -80,8 +84,8 @@ public class SignUpDto {
         @NotBlank(message = "studentType 은 필수값입니다.")
         private String studentType;
 
-        @NotBlank(message = "schoolName 은 필수값입니다.")
-        private String schoolName;
+        @NotBlank(message = "highSchool 은 필수값입니다.")
+        private String highSchool;
 
         @NotNull(message = "year 은 필수값입니다.")
         private Integer year;
@@ -91,7 +95,12 @@ public class SignUpDto {
     @Getter
     @Builder
     public static class SignUpResponse {
-        private final String signUpToken;
+        private final String memberId;
+        private final String uuid;
+        private final String nickname;
+        private final List<String> roles;
+        private final String accessToken;
+        private final String refreshToken;
     }
 
 }

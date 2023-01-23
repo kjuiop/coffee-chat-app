@@ -28,14 +28,14 @@ public class MentorController {
     private final MentorDtoMapper mentorDtoMapper;
     private final MentorFacade mentorFacade;
 
-    @PutMapping("school-name")
+    @PutMapping("university")
     @ResponseBody
-    public ResponseEntity<ApiResponse> changeSchoolName(
+    public ResponseEntity<ApiResponse> changeUniversity(
             @PathVariable String uuid,
-            @RequestBody @Valid MentorDto.ChangeSchoolNameRequest request
+            @RequestBody @Valid MentorDto.ChangeUniversityRequest request
     ) {
-        MentorCommand.ChangeSchoolName mentorCommand = mentorDtoMapper.of(request);
-        boolean result = mentorFacade.changeSchoolName(uuid, mentorCommand);
+        MentorCommand.ChangeUniversity mentorCommand = mentorDtoMapper.of(request);
+        boolean result = mentorFacade.changeUniversity(uuid, mentorCommand);
         MentorDto.Response response = mentorDtoMapper.of(result);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }

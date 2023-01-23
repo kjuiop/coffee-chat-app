@@ -58,13 +58,14 @@ public class MemberCommand {
     public static class MenteeDetailInfo {
         private final StudentType studentType;
         private final Integer year;
-        private final String schoolName;
+        private final String highSchool;
     }
 
     @Getter
     @Builder
     public static class MentorDetailInfo {
-        private final String schoolName;
+        private final String university;
+        private final String highSchool;
         private final Integer year;
         private final String studentNo;
         private final String major;
@@ -75,7 +76,7 @@ public class MemberCommand {
     public static class ParentDetailInfo {
         private final StudentType studentType;
         private final Integer year;
-        private final String schoolName;
+        private final String highSchool;
     }
 
     @Getter

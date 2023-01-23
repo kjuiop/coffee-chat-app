@@ -26,14 +26,14 @@ public class MenteeController {
     private final MenteeDtoMapper menteeDtoMapper;
     private final MenteeFacade menteeFacade;
 
-    @PutMapping("school-name")
+    @PutMapping("high-school")
     @ResponseBody
     public ResponseEntity<ApiResponse> changeSchoolName(
             @PathVariable String uuid,
-            @RequestBody @Valid MenteeDto.ChangeSchoolNameRequest request
+            @RequestBody @Valid MenteeDto.ChangeHighSchoolRequest request
     ) {
-        MenteeCommand.ChangeSchoolName menteeCommand = menteeDtoMapper.of(request);
-        boolean result = menteeFacade.changeSchoolName(uuid, menteeCommand);
+        MenteeCommand.ChangeHighSchool menteeCommand = menteeDtoMapper.of(request);
+        boolean result = menteeFacade.changeHighSchool(uuid, menteeCommand);
         MenteeDto.Response response = menteeDtoMapper.of(result);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }

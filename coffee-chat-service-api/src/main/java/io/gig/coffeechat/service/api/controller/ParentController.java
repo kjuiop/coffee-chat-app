@@ -27,14 +27,14 @@ public class ParentController {
     private final ParentDtoMapper parentDtoMapper;
     private final ParentFacade parentFacade;
 
-    @PutMapping("school-name")
+    @PutMapping("high-school")
     @ResponseBody
-    public ResponseEntity<ApiResponse> changeSchoolName(
+    public ResponseEntity<ApiResponse> changeHighSchool(
             @PathVariable String uuid,
-            @RequestBody @Valid ParentDto.ChangeSchoolNameRequest request
+            @RequestBody @Valid ParentDto.ChangeHighSchoolRequest request
     ) {
-        ParentCommand.ChangeSchoolName parentCommand = parentDtoMapper.of(request);
-        boolean result = parentFacade.changeSchoolName(uuid, parentCommand);
+        ParentCommand.ChangeHighSchool parentCommand = parentDtoMapper.of(request);
+        boolean result = parentFacade.changeHighSchool(uuid, parentCommand);
         ParentDto.Response response = parentDtoMapper.of(result);
         return new ResponseEntity<>(ApiResponse.OK(response), HttpStatus.OK);
     }

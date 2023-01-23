@@ -15,8 +15,8 @@ public class ParentFacade {
 
     private final ParentService parentService;
 
-    public boolean changeSchoolName(String uuid, ParentCommand.ChangeSchoolName request) {
-        return parentService.changeSchoolName(uuid, request);
+    public boolean changeHighSchool(String uuid, ParentCommand.ChangeHighSchool request) {
+        return parentService.changeHighSchool(uuid, request);
     }
 
     public boolean changeYear(String uuid, ParentCommand.ChangeYear request) {

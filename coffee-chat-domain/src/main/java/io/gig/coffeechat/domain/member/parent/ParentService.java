@@ -6,7 +6,7 @@ package io.gig.coffeechat.domain.member.parent;
  */
 public interface ParentService {
 
-    boolean changeSchoolName(String uuid, ParentCommand.ChangeSchoolName request);
+    boolean changeHighSchool(String uuid, ParentCommand.ChangeHighSchool request);
 
     boolean changeYear(String uuid, ParentCommand.ChangeYear request);
 }

@@ -3,6 +3,7 @@ package io.gig.coffeechat.domain.member.mentor;
 import io.gig.coffeechat.domain.member.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
 
@@ -18,7 +19,8 @@ public class MentorSignUpService implements SignUpService {
     private final MemberStore memberStore;
 
     @Override
-    public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
+    @Transactional
+    public MemberInfo.Main signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
 
         MentorDetail mentorDetail = MentorDetail.createMentorDetail(signUpInfo.getMentorDetailInfo());
@@ -28,7 +30,7 @@ public class MentorSignUpService implements SignUpService {
         newMentor.validateNickname(newMentor.getNickname());
 
         Member savedMentor = memberStore.store(newMentor);
-        return savedMentor.getUuid();
+        return new MemberInfo.Main(savedMentor);
     }
 
     private void validateSignUp(String uuid, String email, String nickname) {

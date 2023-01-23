@@ -3,6 +3,7 @@ package io.gig.coffeechat.domain.member.parent;
 import io.gig.coffeechat.domain.member.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.InvalidParameterException;
 
@@ -18,7 +19,8 @@ public class ParentSignUpService implements SignUpService {
     private final MemberStore memberStore;
 
     @Override
-    public String signUp(String uuid, MemberCommand.SignUp signUpInfo) {
+    @Transactional
+    public MemberInfo.Main signUp(String uuid, MemberCommand.SignUp signUpInfo) {
         validateSignUp(uuid, signUpInfo.getEmail(), signUpInfo.getNickname());
 
         ParentDetail parentDetail = ParentDetail.createParentDetail(signUpInfo.getParentDetailInfo());
@@ -28,7 +30,7 @@ public class ParentSignUpService implements SignUpService {
         newParent.validateNickname(newParent.getNickname());
 
         Member savedParent = memberStore.store(newParent);
-        return savedParent.getUuid();
+        return new MemberInfo.Main(savedParent);
     }
 
     private void validateSignUp(String uuid, String email, String nickname) {
