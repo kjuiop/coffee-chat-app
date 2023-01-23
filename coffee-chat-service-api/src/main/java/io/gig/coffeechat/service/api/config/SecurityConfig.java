@@ -1,89 +1,89 @@
 package io.gig.coffeechat.service.api.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import io.gig.coffeechat.domain.member.auth.AuthServiceImpl;
-import io.gig.coffeechat.service.api.filter.FirebaseTokenFilter;
+import io.gig.coffeechat.service.api.jwt.JwtAccessDeniedHandler;
+import io.gig.coffeechat.service.api.jwt.JwtAuthenticationEntryPoint;
+import io.gig.coffeechat.service.api.jwt.JwtSecurityConfig;
+import io.gig.coffeechat.service.api.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.RegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
-import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 /**
  * @author : JAKE
- * @date : 2022/11/16
+ * @date : 2023/01/22
  */
-@Configuration
-@RequiredArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@RequiredArgsConstructor
+public class SecurityConfig {
 
-    private final FirebaseTokenFilter firebaseTokenFilter;
-    private final AuthServiceImpl authService;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    private final TokenProvider tokenProvider;
 
-        http.httpBasic().disable()
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().antMatchers("resources/**", "/favicon.ico");
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+
+        return httpSecurity
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeRequests().anyRequest().permitAll();
-//        http.authorizeRequests()
-//                .antMatchers("/api/health-check", "/api/members/sign-up/**", "/api/email-verify", "/api/nickname-verify", "/api/members/firebase/**")
-//                .permitAll()
-//                .anyRequest().authenticated().and()
-//                .addFilterBefore(firebaseTokenFilter,
-//                        UsernamePasswordAuthenticationFilter.class)
-//                .exceptionHandling()
-//                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-    }
+                /* 401, 403 Exception 핸들링 */
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
-    @Bean
-    public RegistrationBean firebaseAuthTokenRegister(FirebaseTokenFilter filter) {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean(filter);
-        registrationBean.setEnabled(false);
-        return registrationBean;
-    }
+                /* http basic, formLogin 사용하지 않음 */
+                .and()
+                .httpBasic().disable()
+                .formLogin().disable()
+                .headers().frameOptions().disable().and()
+                .cors()
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(authService);
-    }
+                /* 세션 사용하지 않음 */
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/resources/**");
-    }
+                /* HttpServletRequest 를 사용하는 요청들에 대한 접근 제한 설정 */
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/health-check", "/init-data",
+                        "/api/members/sign-up/**", "/api/members/login",
+                        "/api/nickname-verify", "/api/email-verify"
+                )
+                .permitAll()
+                .anyRequest().authenticated()
 
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
+                /* JwtSecurityConfig 적용 */
+                .and()
+                .apply(new JwtSecurityConfig(tokenProvider))
+
+                .and()
+                .build();
     }
 }

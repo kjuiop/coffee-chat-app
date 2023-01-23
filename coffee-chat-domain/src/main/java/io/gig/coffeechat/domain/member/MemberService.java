@@ -8,7 +8,7 @@ import java.util.List;
  */
 public interface MemberService {
 
-    boolean login(MemberCommand.SignIn request);
+    boolean login(MemberCommand.SignIn request, String refreshToken);
 
     boolean validateEmail(String email);
 

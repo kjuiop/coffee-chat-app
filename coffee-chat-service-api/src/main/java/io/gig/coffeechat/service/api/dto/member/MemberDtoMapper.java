@@ -29,4 +29,6 @@ public interface MemberDtoMapper {
 
     List<MemberDto.Main> of(List<MemberInfo.Main> members);
 
+    MemberDto.TokenResponse of(MemberInfo.TokenInfo tokenInfo);
+
 }

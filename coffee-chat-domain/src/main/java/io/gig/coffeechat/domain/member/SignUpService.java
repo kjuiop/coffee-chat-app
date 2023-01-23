@@ -6,5 +6,5 @@ package io.gig.coffeechat.domain.member;
  */
 @FunctionalInterface
 public interface SignUpService {
-    String signUp(String uuid, MemberCommand.SignUp signUp);
+    MemberInfo.Main signUp(String uuid, MemberCommand.SignUp signUp);
 }

@@ -62,6 +62,13 @@ public class Member extends BaseTimeEntity {
     @Column(length = 1000)
     private String profileImageUrl;
 
+    private String refreshToken;
+
+    @Builder.Default
+    @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private YnType disableYn = YnType.N;
+
     @Builder.Default
     @Column(columnDefinition = "varchar(2) default 'N'", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -176,9 +183,10 @@ public class Member extends BaseTimeEntity {
         this.marketingAgreementAt = null;
     }
 
-    public void login() {
+    public void login(String refreshToken) {
         LocalDateTime current = LocalDateTime.now();
         this.lastLoginAt = current;
+        this.refreshToken = refreshToken;
     }
 
     public void addRole(MemberRole role) {
