@@ -24,6 +24,8 @@ public class MemberInfo {
         private final String uuid;
         private final String nickname;
         private List<String> roles;
+        private String accessToken;
+        private String refreshToken;
 
         public Main(Long memberId, String uuid, String nickname) {
             this.memberId = memberId;
@@ -36,6 +38,11 @@ public class MemberInfo {
             this.uuid = member.getUuid();
             this.nickname = member.getNickname();
             this.roles = member.getMemberRoles().stream().map(MemberRole::getRoleName).collect(Collectors.toList());
+        }
+
+        public void setTokenInfo(String accessToken, String refreshToken) {
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
         }
     }
 

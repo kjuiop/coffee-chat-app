@@ -28,7 +28,6 @@ public class AuthController {
     private final SignInDtoMapper signInDtoMapper;
     private final MemberDtoMapper memberDtoMapper;
     private final MemberFacade memberFacade;
-    private final TokenProvider tokenProvider;
 
     @PostMapping("sign-up/{uuid}")
     @ResponseBody

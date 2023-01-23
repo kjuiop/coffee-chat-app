@@ -99,6 +99,8 @@ public class SignUpDto {
         private final String uuid;
         private final String nickname;
         private final List<String> roles;
+        private final String accessToken;
+        private final String refreshToken;
     }
 
 }

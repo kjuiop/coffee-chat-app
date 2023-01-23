@@ -4,6 +4,7 @@ import io.gig.coffeechat.domain.member.*;
 import io.gig.coffeechat.domain.role.Role;
 import io.gig.coffeechat.domain.role.RoleService;
 import io.gig.coffeechat.service.api.dto.member.MemberDto;
+import io.gig.coffeechat.service.api.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,15 @@ public class MemberFacade {
 
     private final SignUpServiceFactory signUpServiceFactory;
     private final MemberService memberService;
+    private final TokenProvider tokenProvider;
 
     public MemberInfo.Main signUp(String uuid, MemberCommand.SignUp request) {
         SignUpService signUpService = signUpServiceFactory.create(request);
-        return signUpService.signUp(uuid, request);
+        MemberInfo.Main memberInfo = signUpService.signUp(uuid, request);
+        String accessToken = tokenProvider.createAccessToken(memberInfo.getUuid(), memberInfo.getRoles());
+        String refreshToken = tokenProvider.createRefreshToken(memberInfo.getUuid(), memberInfo.getRoles());
+        memberInfo.setTokenInfo(accessToken, refreshToken);
+        return memberInfo;
     }
 
     public boolean login(MemberCommand.SignIn request) {
